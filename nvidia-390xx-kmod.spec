@@ -10,7 +10,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.87
 # Taken over by kmodtool
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -19,6 +19,7 @@ URL:           http://www.nvidia.com/
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch0:        nv-linux-arm.patch
 Patch1:        nv-linux-arm2.patch
+Patch2:        4.19_kernel.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64 armv7hl
@@ -44,6 +45,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # patch loop
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -71,6 +73,9 @@ done
 
 
 %changelog
+* Wed Oct 10 2018 Leigh Scott <leigh123linux@googlemail.com> - 3:390.87-2
+- Patch for 4.19 kernel
+
 * Sun Sep 23 2018 Richard Shaw <hobbes1069@gmail.com> - 3:390.87-1
 - Update to 390.87.
 
