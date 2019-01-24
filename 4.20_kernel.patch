@@ -12,7 +12,7 @@
  
  struct nv_ipmi_softc
  {
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 0)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 20, 0)
      ipmi_user_t         p_user;     // ptr to ipmi_msghandler user structure
 +#else
 +    struct ipmi_user    *p_user;
@@ -24,7 +24,7 @@
  static inline int
  nv_ipmi_set_my_address
  (
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 0)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 20, 0)
      ipmi_user_t     user,
 +#else
 +    struct ipmi_user *user,
@@ -47,7 +47,7 @@
  
      page_offset = vmf->pgoff - drm_vma_node_start(&gem->vma_node);
  
-+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 0)
++#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 20, 0)
      ret = vm_insert_pfn(vma, address, pfn + page_offset);
 +#else
 +    ret = vmf_insert_pfn(vma, address, pfn + page_offset);
