@@ -10,7 +10,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.129
 # Taken over by kmodtool
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -71,6 +71,9 @@ done
 
 
 %changelog
+* Tue Sep 03 2019 Leigh Scott <leigh123linux@gmail.com> - 3:390.129-2
+- Rebuild for new el7 kernel
+
 * Tue Aug 06 2019 Leigh Scott <leigh123linux@googlemail.com> - 3:390.129-1
 - Update to 390.129 release
 
