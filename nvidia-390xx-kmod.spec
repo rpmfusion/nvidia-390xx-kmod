@@ -3,14 +3,16 @@
 # "buildforkernels newest" macro for just that build; immediately after
 # queuing that build enable the macro again for subsequent builds; that way
 # a new akmod package will only get build when a new one is actually needed
+%if 0%{?fedora}
 %global buildforkernels akmod
 %global debug_package %{nil}
+%endif
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.129
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -71,6 +73,9 @@ done
 
 
 %changelog
+* Tue Sep 03 2019 Leigh Scott <leigh123linux@gmail.com> - 3:390.129-3
+- rebuilt
+
 * Tue Sep 03 2019 Leigh Scott <leigh123linux@gmail.com> - 3:390.129-2
 - Rebuild for new el7 kernel
 
