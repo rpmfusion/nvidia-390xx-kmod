@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.132
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -21,6 +21,10 @@ URL:           http://www.nvidia.com/
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch0:        nv-linux-arm.patch
 Patch1:        nv-linux-arm2.patch
+# https://gitlab.com/snippets/1943814
+Patch2:        kernel-5.5.patch
+# https://gitlab.com/snippets/1943873
+Patch3:	       kernel-5.6.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64 armv7hl
@@ -46,6 +50,8 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # patch loop
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -73,6 +79,9 @@ done
 
 
 %changelog
+* Sun Mar 09 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-3
+- Patches for kernel 5.5 and 5.6
+
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3:390.132-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
