@@ -79,7 +79,7 @@ done
 
 
 %changelog
-* Sun Mar 09 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-3
+* Mon Mar 09 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-3
 - Patches for kernel 5.5 and 5.6
 
 * Wed Feb 05 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3:390.132-2
