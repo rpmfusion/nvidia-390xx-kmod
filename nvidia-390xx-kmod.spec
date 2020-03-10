@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.132
 # Taken over by kmodtool
-Release:       4%{?dist}
+Release:       4%{?dist}.1
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -51,7 +51,9 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%ifarch x86_64
 %patch3 -p1
+%endif
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -79,6 +81,9 @@ done
 
 
 %changelog
+* Tue Mar 10 2020 Nicolas Chauvet <kwizart@gmail.com> - 3:390.132-4.1
+- Conditionlize arched patches
+
 * Tue Mar 10 2020 Nicolas Chauvet <kwizart@gmail.com> - 3:390.132-4
 - Drop armv7hl build
 
