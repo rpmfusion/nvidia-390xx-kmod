@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.132
 # Taken over by kmodtool
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -27,7 +27,7 @@ Patch2:        kernel-5.5.patch
 Patch3:	       kernel-5.6.patch
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i686 x86_64 armv7hl
+ExclusiveArch:  i686 x86_64
 
 # get the needed BuildRequires (in parts depending on what we build for)
 %global AkmodsBuildRequires %{_bindir}/kmodtool, xorg-x11-drv-nvidia-390xx-kmodsrc >= %{epoch}:%{version}
@@ -79,6 +79,9 @@ done
 
 
 %changelog
+* Tue Mar 10 2020 Nicolas Chauvet <kwizart@gmail.com> - 3:390.132-4
+- Drop armv7hl build
+
 * Mon Mar 09 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-3
 - Patches for kernel 5.5 and 5.6
 
