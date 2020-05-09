@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.132
 # Taken over by kmodtool
-Release:       4%{?dist}.1
+Release:       5%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -21,10 +21,8 @@ URL:           http://www.nvidia.com/
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch0:        nv-linux-arm.patch
 Patch1:        nv-linux-arm2.patch
-# https://gitlab.com/snippets/1943814
-Patch2:        kernel-5.5.patch
-# https://gitlab.com/snippets/1943873
-Patch3:	       kernel-5.6.patch
+Patch2:        https://gitlab.com/EULA/snippets/-/raw/master/NVIDIA/kernel-5.5-390.132-nomanifest.patch
+Patch3:	       https://gitlab.com/EULA/snippets/-/raw/master/NVIDIA/kernel-5.6-390.132.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64
@@ -81,6 +79,9 @@ done
 
 
 %changelog
+* Sat May 09 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-5
+- Update kernel-5.6 patch
+
 * Tue Mar 10 2020 Nicolas Chauvet <kwizart@gmail.com> - 3:390.132-4.1
 - Conditionlize arched patches
 

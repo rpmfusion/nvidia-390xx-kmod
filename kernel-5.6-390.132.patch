@@ -80,24 +80,25 @@ index 3c812ea..e57c4f9 100644
  #endif  /* CONFIG_PROC_FS */
  
 diff --git a/kernel/common/inc/nv-time.h b/kernel/common/inc/nv-time.h
-index 2c799c9..0206062 100644
+index 2c799c9..b005363 100644
 --- a/kernel/common/inc/nv-time.h
 +++ b/kernel/common/inc/nv-time.h
-@@ -30,7 +30,12 @@
+@@ -30,7 +30,13 @@
  #include <linux/ktime.h>
  #endif
  
 -static inline void nv_gettimeofday(struct timeval *tv)
-+struct nv_timeval {
-+    __kernel_long_t      tv_sec;
-+    __kernel_suseconds_t tv_usec;
-+};
++#if defined(NV_HAVE_TIMEVAL)
++#define nv_timeval timeval
++#else
++#define nv_timeval __kernel_old_timeval
++#endif
 +
 +static inline void nv_gettimeofday(struct nv_timeval *tv)
  {
  #ifdef NV_DO_GETTIMEOFDAY_PRESENT
      do_gettimeofday(tv);
-@@ -39,7 +44,7 @@ static inline void nv_gettimeofday(struct timeval *tv)
+@@ -39,7 +45,7 @@ static inline void nv_gettimeofday(struct timeval *tv)
  
      ktime_get_real_ts64(&now);
  
@@ -107,7 +108,7 @@ index 2c799c9..0206062 100644
          .tv_usec = now.tv_nsec/1000,
      };
 diff --git a/kernel/conftest.sh b/kernel/conftest.sh
-index ec9e093..463a464 100755
+index ec9e093..e0f937d 100755
 --- a/kernel/conftest.sh
 +++ b/kernel/conftest.sh
 @@ -1197,6 +1197,22 @@ compile_test() {
@@ -133,7 +134,7 @@ index ec9e093..463a464 100755
          ioremap_wc)
              #
              # Determine if the ioremap_wc() function is present.
-@@ -1430,6 +1446,31 @@ compile_test() {
+@@ -1430,6 +1446,45 @@ compile_test() {
              compile_check_conftest "$CODE" "NV_SG_ALLOC_TABLE_FROM_PAGES_PRESENT" "" "functions"
          ;;
  
@@ -147,16 +148,30 @@ index ec9e093..463a464 100755
 +            compile_check_conftest "$CODE" "NV_HAVE_PROC_OPS" "" "types"
 +        ;;
 +
++        timeval)
++            CODE="
++            #include <linux/time.h>
++            #if defined(NV_LINUX_KTIME_H_PRESENT)
++            #include <linux/ktime.h>
++            #endif
++            int conftest_timeval(void) {
++                return offsetof(struct timeval, tv_sec);
++            }"
++
++            compile_check_conftest "$CODE" "NV_HAVE_TIMEVAL" "" "types"
++        ;;
++
 +        ktime_get_raw_ts64)
 +            #
 +            # Determine if the ktime_get_raw_ts64() function is present.
 +            #
 +            CODE="
++            #include <linux/time.h>
++            #if defined(NV_LINUX_KTIME_H_PRESENT)
 +            #include <linux/ktime.h>
++            #endif
 +            int conftest_ktime_get_raw_ts64(void) {
-+                struct timespec64 ts = {0};
-+
-+                ktime_get_raw_ts64(&ts64);
++                ktime_get_raw_ts64();
 +            }"
 +
 +            compile_check_conftest "$CODE" "NV_KTIME_GET_RAW_TS64_PRESENT" "" "functions"
@@ -283,7 +298,7 @@ index 5808a88..bc60a08 100644
  static int
  nv_procfs_read_text_file(
 diff --git a/kernel/nvidia/nvidia.Kbuild b/kernel/nvidia/nvidia.Kbuild
-index 8ae1016..da7f135 100644
+index 8ae1016..dea8d10 100644
 --- a/kernel/nvidia/nvidia.Kbuild
 +++ b/kernel/nvidia/nvidia.Kbuild
 @@ -117,6 +117,7 @@ NV_CONFTEST_FUNCTION_COMPILE_TESTS += on_each_cpu
@@ -294,13 +309,21 @@ index 8ae1016..da7f135 100644
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += ioremap_wc
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += acpi_walk_namespace
  NV_CONFTEST_FUNCTION_COMPILE_TESTS += pci_domain_nr
-@@ -169,7 +170,9 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += outer_flush_all
+@@ -125,6 +126,7 @@ NV_CONFTEST_FUNCTION_COMPILE_TESTS += sg_alloc_table
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += sg_init_table
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += pci_get_domain_bus_and_slot
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += get_num_physpages
++NV_CONFTEST_FUNCTION_COMPILE_TESTS += ktime_get_raw_ts64
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += efi_enabled
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += proc_create_data
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += pde_data
+@@ -169,7 +171,9 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += outer_flush_all
  NV_CONFTEST_TYPE_COMPILE_TESTS += proc_dir_entry
  NV_CONFTEST_TYPE_COMPILE_TESTS += scatterlist
  NV_CONFTEST_TYPE_COMPILE_TESTS += sg_table
 +NV_CONFTEST_TYPE_COMPILE_TESTS += proc_ops
  NV_CONFTEST_TYPE_COMPILE_TESTS += file_operations
-+NV_CONFTEST_TYPE_COMPILE_TESTS += ktime_get_raw_ts64
++NV_CONFTEST_TYPE_COMPILE_TESTS += timeval
  NV_CONFTEST_TYPE_COMPILE_TESTS += vm_operations_struct
  NV_CONFTEST_TYPE_COMPILE_TESTS += atomic_long_type
  NV_CONFTEST_TYPE_COMPILE_TESTS += pci_save_state
