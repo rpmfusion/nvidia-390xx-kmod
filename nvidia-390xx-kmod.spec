@@ -53,6 +53,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %ifarch x86_64
 %patch3 -p1
 %endif
+%patch4 -p1
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -80,6 +81,9 @@ done
 
 
 %changelog
+* Sun May 10 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-7
+- Actually patch for kernel 5.7
+
 * Sat May 09 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-6
 - Patch for kernel 5.7
 
