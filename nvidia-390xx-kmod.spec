@@ -10,9 +10,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.132
+Version:       390.138
 # Taken over by kmodtool
-Release:       7%{?dist}
+Release:       1%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -21,12 +21,9 @@ URL:           http://www.nvidia.com/
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch0:        nv-linux-arm.patch
 Patch1:        nv-linux-arm2.patch
-Patch2:        https://gitlab.com/EULA/snippets/-/raw/master/NVIDIA/kernel-5.5-390.132-nomanifest.patch
-Patch3:	       https://gitlab.com/EULA/snippets/-/raw/master/NVIDIA/kernel-5.6-390.132.patch
-Patch4:        https://gitlab.com/EULA/snippets/-/raw/master/NVIDIA/kernel-5.7-rc1-390.132.patch
 
 # needed for plague to make sure it builds for i586 and i686
-ExclusiveArch:  i686 x86_64
+ExclusiveArch:  i686 x86_64 armv7hl
 
 # get the needed BuildRequires (in parts depending on what we build for)
 %global AkmodsBuildRequires %{_bindir}/kmodtool, xorg-x11-drv-nvidia-390xx-kmodsrc >= %{epoch}:%{version}
@@ -49,11 +46,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # patch loop
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%ifarch x86_64
-%patch3 -p1
-%endif
-%patch4 -p1
+
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -81,6 +74,9 @@ done
 
 
 %changelog
+* Fri Jun 26 2020 Leigh Scott <leigh123linux@gmail.com> - 3:390.138-1
+- Update to 390.138 release
+
 * Sun May 10 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.132-7
 - Actually apply patch for kernel 5.7
 
