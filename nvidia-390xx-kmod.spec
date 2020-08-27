@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.138
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -21,6 +21,7 @@ URL:           http://www.nvidia.com/
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch0:        nv-linux-arm.patch
 Patch1:        nv-linux-arm2.patch
+Patch2:        kernel-5.8.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64 armv7hl
@@ -46,6 +47,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # patch loop
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 
 for kernel_version  in %{?kernel_versions} ; do
@@ -58,6 +60,7 @@ for kernel_version in %{?kernel_versions}; do
     make V=1 %{?_smp_mflags} \
         KERNEL_UNAME="${kernel_version%%___*}" SYSSRC="${kernel_version##*___}" \
         IGNORE_CC_MISMATCH=1 IGNORE_XEN_PRESENCE=1 IGNORE_PREEMPT_RT_PRESENCE=1 \
+        NV_EXCLUDE_KERNEL_MODULES=nvidia-uvm \
         module
   popd
 done
@@ -74,6 +77,10 @@ done
 
 
 %changelog
+* Thu Aug 27 2020 Leigh Scott <leigh123linux@gmail.com> - 3:390.138-3
+- Patch for kernel 5.8
+- Exclude nvidia-uvm due to GPL-only symbol 'radix_tree_preloads'
+
 * Wed Aug 19 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3:390.138-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
