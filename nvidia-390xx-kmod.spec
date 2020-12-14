@@ -12,16 +12,45 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.138
 # Taken over by kmodtool
-Release:       3%{?dist}
+Release:       4%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
 URL:           http://www.nvidia.com/
 
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
-Patch0:        nv-linux-arm.patch
-Patch1:        nv-linux-arm2.patch
-Patch2:        kernel-5.8.patch
+
+# Patches from Debian https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers/-/tree/390xx/master/debian/module/debian/patches
+# kernel support
+Patch10: do-div-cast.patch
+Patch11: kernel-5.7.0-set-memory-array.patch
+Patch12: 0001-backport-nv_vmalloc-changes-from-450.57.patch
+Patch13: 0002-work-around-mmap_-sem-lock-rename.patch
+Patch14: 0003-work-around-mmap_-sem-lock-rename-uvm-part.patch
+Patch15: disable-module-nvidia-uvm.patch
+Patch16: linux-5.9.patch
+Patch17: 0001-backport-get_user_pages_remote-changes-from-455.23.04.patch
+Patch18: 0002-backport-vga_tryget-changes-from-455.23.04.patch
+Patch19: 0003-backport-drm_driver_has_gem_free_object-changes-from-455.23.04.patch
+Patch20: 0004-backport-drm_display_mode_has_vrefresh-changes-from-455.23.04.patch
+Patch21: 0005-backport-drm_driver_master_set_has_int_return_type-changes-from-455.23.04.patch
+Patch22: 0006-backport-drm_gem_object_put_unlocked-changes-from-455.23.04.patch
+
+# build system updates
+Patch30: use-kbuild-compiler.patch
+Patch31: use-kbuild-flags.patch
+Patch32: use-kbuild-gcc-plugins.patch
+Patch33: conftest-verbose.patch
+Patch34: cc_version_check-gcc5.patch
+#These are Debian specific. Dones not apply to Fedora
+#Patch35: nvidia-use-ARCH.o_binary.patch
+#Patch36: nvidia-modeset-use-ARCH.o_binary.patch
+
+# armhf support
+Patch40: include-swiotlb-header-on-arm.patch
+Patch41: ignore_xen_on_arm.patch
+Patch42: arm-outer-sync.patch
+Patch43: nvidia-drm-arm-cflags.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64 armv7hl
@@ -44,11 +73,29 @@ The nvidia 390xx %{version} display driver kernel module for kernel %{kversion}.
 kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterfile %{SOURCE11} %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
-# patch loop
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-
+# Apply patches
+%patch10 -p1 -d kernel
+%patch11 -p1 -d kernel
+%patch12 -p1 -d kernel
+%patch13 -p1 -d kernel
+%patch14 -p1 -d kernel
+%patch15 -p1 -d kernel
+%patch16 -p1 -d kernel
+%patch17 -p1 -d kernel
+%patch18 -p1 -d kernel
+%patch19 -p1 -d kernel
+%patch20 -p1 -d kernel
+%patch21 -p1 -d kernel
+%patch22 -p1 -d kernel
+%patch30 -p1 -d kernel
+%patch31 -p1 -d kernel
+%patch32 -p1 -d kernel
+%patch33 -p1 -d kernel
+%patch34 -p1 -d kernel
+%patch40 -p1 -d kernel
+%patch41 -p1 -d kernel
+%patch42 -p1 -d kernel
+%patch43 -p1 -d kernel
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -77,6 +124,9 @@ done
 
 
 %changelog
+* Mon Dec 14 2020 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.138-4
+- Import patches from Debian, including kernel 5.9 support
+
 * Thu Aug 27 2020 Leigh Scott <leigh123linux@gmail.com> - 3:390.138-3
 - Patch for kernel 5.8
 - Exclude nvidia-uvm due to GPL-only symbol 'radix_tree_preloads'
