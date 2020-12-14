@@ -79,7 +79,9 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch12 -p1 -d kernel
 %patch13 -p1 -d kernel
 %patch14 -p1 -d kernel
+%ifarch i686 x86_64
 %patch15 -p1 -d kernel
+%endif
 %patch16 -p1 -d kernel
 %patch17 -p1 -d kernel
 %patch18 -p1 -d kernel
