@@ -64,25 +64,11 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # Apply patches
 %patch10 -p1 -d kernel
 %patch11 -p1 -d kernel
-#patch12 -p1 -d kernel
-#patch13 -p1 -d kernel
-%ifarch i686 x86_64
-#patch14 -p1 -d kernel
-%endif
-#patch15 -p1 -d kernel
-#patch16 -p1 -d kernel
-#patch17 -p1 -d kernel
-#patch18 -p1 -d kernel
-#patch19 -p1 -d kernel
-#patch20 -p1 -d kernel
-#patch21 -p1 -d kernel
-#patch22 -p1 -d kernel
 %patch30 -p1 -d kernel
 %patch31 -p1 -d kernel
 %patch32 -p1 -d kernel
 %patch33 -p1 -d kernel
 %patch34 -p1 -d kernel
-#patch40 -p1 -d kernel
 %patch41 -p1 -d kernel
 %patch42 -p1 -d kernel
 %patch43 -p1 -d kernel
