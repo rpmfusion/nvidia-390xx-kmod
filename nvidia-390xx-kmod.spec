@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.141
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -82,7 +82,7 @@ for kernel_version in %{?kernel_versions}; do
   pushd _kmod_build_${kernel_version%%___*}/
     make V=1 %{?_smp_mflags} \
         KERNEL_UNAME="${kernel_version%%___*}" SYSSRC="${kernel_version##*___}" \
-        IGNORE_CC_MISMATCH=1 IGNORE_XEN_PRESENCE=1 IGNORE_PREEMPT_RT_PRESENCE=1
+        IGNORE_CC_MISMATCH=1 IGNORE_XEN_PRESENCE=1 IGNORE_PREEMPT_RT_PRESENCE=1 \
         module
   popd
 done
@@ -98,6 +98,9 @@ done
 
 
 %changelog
+* Fri Jan 22 2021 Leigh Scott <leigh123linux@gmail.com> - 3:390.141-3
+- Fix (rfbz#5901)
+
 * Sat Jan 16 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.141-2
 - Re-enable nvidia-uvm. The GPL licensing issue seems to have been solved in 390.141.
 
