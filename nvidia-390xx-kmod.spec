@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.141
 # Taken over by kmodtool
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -24,6 +24,8 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 # kernel support
 Patch10: do-div-cast.patch
 Patch11: kernel-5.7.0-set-memory-array.patch
+# https://aur.archlinux.org/cgit/aur.git/plain/kernel-5.11.patch?h=nvidia-390xx
+Patch12: kernel-5.11.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -64,6 +66,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # Apply patches
 %patch10 -p1 -d kernel
 %patch11 -p1 -d kernel
+%patch12 -p2 -d kernel
 %patch30 -p1 -d kernel
 %patch31 -p1 -d kernel
 %patch32 -p1 -d kernel
@@ -98,6 +101,9 @@ done
 
 
 %changelog
+* Mon Mar 22 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.141-5
+- Patch for kernel 5.11 (Bug #5951)
+
 * Thu Feb 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3:390.141-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
