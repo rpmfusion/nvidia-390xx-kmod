@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.141
 # Taken over by kmodtool
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -38,6 +38,7 @@ Patch34: cc_version_check-gcc5.patch
 #Patch36: nvidia-modeset-use-ARCH.o_binary.patch
 
 # armhf support
+Patch40: include-swiotlb-header-on-arm.patch
 Patch41: ignore_xen_on_arm.patch
 Patch42: arm-outer-sync.patch
 Patch43: nvidia-drm-arm-cflags.patch
@@ -72,6 +73,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch32 -p1 -d kernel
 %patch33 -p1 -d kernel
 %patch34 -p1 -d kernel
+%patch40 -p1 -d kernel
 %patch41 -p1 -d kernel
 %patch42 -p1 -d kernel
 %patch43 -p1 -d kernel
@@ -101,6 +103,9 @@ done
 
 
 %changelog
+* Mon Mar 22 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.141-6
+- Update patches from Debian.
+
 * Mon Mar 22 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.141-5
 - Patch for kernel 5.11 (Bug #5951)
 
