@@ -23,10 +23,12 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 # Patches partially sourced from
 #  Debian   https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers/-/tree/390xx/master/debian/module/debian/patches
 #  Arch     https://aur.archlinux.org/packages/nvidia-390xx-dkms/
+#           https://gitlab.com/herecura/packages/nvidia-390xx-dkms/
 
 # kernel support
 Patch10: do-div-cast.patch
 Patch11: kernel-5.12.patch
+Patch12: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -68,6 +70,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # Apply patches
 %patch10 -p1 -d kernel
 %patch11 -p2 -d kernel
+%patch12 -p2 -d kernel
 %patch30 -p1 -d kernel
 %patch31 -p1 -d kernel
 %patch32 -p1 -d kernel
@@ -104,7 +107,8 @@ done
 
 %changelog
 * Sun Jun 27 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-2
-- Kernel 5.12 patch taken from OpenSuSE via Arch
+- Kernel 5.12 patch taken from OpenSuSE via Arch repo
+- Kernel 5.13 patch taken from Herecura Arch repo
 
 * Tue Apr 20 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-1
 - Update to 390.143
