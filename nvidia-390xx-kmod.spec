@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.143
 # Taken over by kmodtool
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -20,9 +20,13 @@ URL:           http://www.nvidia.com/
 
 Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 
-# Patches from Debian https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers/-/tree/390xx/master/debian/module/debian/patches
+# Patches partially sourced from
+#  Debian   https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers/-/tree/390xx/master/debian/module/debian/patches
+#  Arch     https://aur.archlinux.org/packages/nvidia-390xx-dkms/
+
 # kernel support
 Patch10: do-div-cast.patch
+Patch11: kernel-5.12.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -63,6 +67,7 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
 %patch10 -p1 -d kernel
+%patch11 -p2 -d kernel
 %patch30 -p1 -d kernel
 %patch31 -p1 -d kernel
 %patch32 -p1 -d kernel
@@ -98,6 +103,9 @@ done
 
 
 %changelog
+* Sun Jun 27 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-2
+- Kernel 5.12 patch taken from OpenSuSE via Arch
+
 * Tue Apr 20 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-1
 - Update to 390.143
 
