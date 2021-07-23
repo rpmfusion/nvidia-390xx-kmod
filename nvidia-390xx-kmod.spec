@@ -10,9 +10,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.143
+Version:       390.144
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       1%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -68,18 +68,18 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
-%patch10 -p1 -d kernel
-%patch11 -p2 -d kernel
-%patch12 -p2 -d kernel
-%patch30 -p1 -d kernel
-%patch31 -p1 -d kernel
-%patch32 -p1 -d kernel
-%patch33 -p1 -d kernel
-%patch34 -p1 -d kernel
-%patch40 -p1 -d kernel
-%patch41 -p1 -d kernel
-%patch42 -p1 -d kernel
-%patch43 -p1 -d kernel
+%patch10 -p1 -b 10 -d kernel
+%patch11 -p2 -b 11 -d kernel
+%patch12 -p2 -b 12 -d kernel
+%patch30 -p1 -b 30 -d kernel
+%patch31 -p1 -b 31 -d kernel
+%patch32 -p1 -b 32 -d kernel
+%patch33 -p1 -b 33 -d kernel
+%patch34 -p1 -b 34 -d kernel
+%patch40 -p1 -b 40 -d kernel
+%patch41 -p1 -b 41 -d kernel
+%patch42 -p1 -b 42 -d kernel
+%patch43 -p1 -b 42 -d kernel
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -106,6 +106,9 @@ done
 
 
 %changelog
+* Fri Jul 23 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.144-1
+- Update to 390.144
+
 * Sun Jun 27 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-2
 - Kernel 5.12 patch taken from OpenSuSE via Arch repo
 - Kernel 5.13 patch taken from Herecura Arch repo
