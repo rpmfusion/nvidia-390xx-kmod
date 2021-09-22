@@ -12,7 +12,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.144
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -24,11 +24,13 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 #  Debian   https://salsa.debian.org/nvidia-team/nvidia-graphics-drivers/-/tree/390xx/master/debian/module/debian/patches
 #  Arch     https://aur.archlinux.org/packages/nvidia-390xx-dkms/
 #           https://gitlab.com/herecura/packages/nvidia-390xx-dkms/
+#  openSUSE https://build.opensuse.org/package/show/home:luc14n0:nvidia/nvidia-gfxG04
 
 # kernel support
 Patch10: do-div-cast.patch
 Patch11: kernel-5.12.patch
 Patch12: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
+Patch13: https://build.opensuse.org/source/home:luc14n0:nvidia/nvidia-gfxG04/kernel-5.14.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -71,6 +73,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch10 -p1 -b 10 -d kernel
 %patch11 -p2 -b 11 -d kernel
 %patch12 -p2 -b 12 -d kernel
+%patch13 -p2 -b 12 -d kernel
 %patch30 -p1 -b 30 -d kernel
 %patch31 -p1 -b 31 -d kernel
 %patch32 -p1 -b 32 -d kernel
@@ -106,6 +109,9 @@ done
 
 
 %changelog
+* Wed Sep 22 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.144-3
+- Kernel 5.14 patch taken from openSUSE
+
 * Wed Aug 04 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 3:390.144-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
@@ -113,7 +119,7 @@ done
 - Update to 390.144
 
 * Sun Jun 27 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-2
-- Kernel 5.12 patch taken from OpenSuSE via Arch repo
+- Kernel 5.12 patch taken from openSUSE via Arch repo
 - Kernel 5.13 patch taken from Herecura Arch repo
 
 * Tue Apr 20 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.143-1
