@@ -1,0 +1,25 @@
+From c2a0cf09fed824a739f32dcb0bfc28e5df116fde Mon Sep 17 00:00:00 2001
+From: Andreas Beckmann <anbe@debian.org>
+Date: Wed, 22 Dec 2021 18:06:40 +0100
+Subject: [PATCH 2/2] backport error on unknown conftests (uvm part)
+
+---
+ nvidia-uvm/nvidia-uvm.Kbuild | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nvidia-uvm/nvidia-uvm.Kbuild b/nvidia-uvm/nvidia-uvm.Kbuild
+index d447e23..27e33c1 100644
+--- a/nvidia-uvm/nvidia-uvm.Kbuild
++++ b/nvidia-uvm/nvidia-uvm.Kbuild
+@@ -91,7 +91,7 @@ endif
+ 
+ NV_OBJECTS_DEPEND_ON_CONFTEST += $(NVIDIA_UVM_OBJECTS)
+ 
+-NV_CONFTEST_FUNCTION_COMPILE_TESTS += remap_page_range
++#NV_CONFTEST_FUNCTION_COMPILE_TESTS += remap_page_range
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += remap_pfn_range
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += vm_insert_page
+ NV_CONFTEST_FUNCTION_COMPILE_TESTS += kmem_cache_create
+-- 
+2.20.1
+

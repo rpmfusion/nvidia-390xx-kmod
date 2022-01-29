@@ -5,7 +5,7 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
 
 --- a/Kbuild
 +++ b/Kbuild
-@@ -104,6 +104,7 @@ NV_CONFTEST_CMD := /bin/sh $(NV_CONFTEST
+@@ -102,6 +102,7 @@
   "$(CC)" "$(HOST_CC)" $(ARCH) $(NV_KERNEL_SOURCES) $(NV_KERNEL_OUTPUT)
  
  NV_CONFTEST_CFLAGS := $(shell $(NV_CONFTEST_CMD) build_cflags)
@@ -15,7 +15,7 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
  NV_CONFTEST_COMPILE_TEST_HEADERS += $(obj)/conftest/functions.h
 --- a/nvidia/nvidia.Kbuild
 +++ b/nvidia/nvidia.Kbuild
-@@ -88,7 +88,7 @@ NVIDIA_INTERFACE := nvidia/nv-interface.
+@@ -93,7 +93,7 @@
  always-y += $(NVIDIA_INTERFACE)
  
  $(obj)/$(NVIDIA_INTERFACE): $(addprefix $(obj)/,$(NVIDIA_OBJECTS))
@@ -26,7 +26,7 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
  #
 --- a/Makefile
 +++ b/Makefile
-@@ -111,7 +111,7 @@ else
+@@ -111,7 +111,7 @@
    # cannot be defined in the *Kbuild files, which are only used during stage 1.
  
    %-linux.o: modules
@@ -37,7 +37,7 @@ Description: use KBUILD_CFLAGS and (KBUILD_)LDFLAGS
    # Kbuild's "clean" rule won't clean up the conftest headers on its own, and
 --- a/nvidia-modeset/nvidia-modeset.Kbuild
 +++ b/nvidia-modeset/nvidia-modeset.Kbuild
-@@ -70,7 +70,7 @@ NVIDIA_MODESET_INTERFACE := nvidia-modes
+@@ -75,7 +75,7 @@
  always-y += $(NVIDIA_MODESET_INTERFACE)
  
  $(obj)/$(NVIDIA_MODESET_INTERFACE): $(addprefix $(obj)/,$(NVIDIA_MODESET_OBJECTS))

@@ -16,9 +16,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.144
+Version:       390.147
 # Taken over by kmodtool
-Release:       3%{?dist}
+Release:       1%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -33,10 +33,12 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 #  openSUSE https://build.opensuse.org/package/show/home:luc14n0:nvidia/nvidia-gfxG04
 
 # kernel support
-Patch10: do-div-cast.patch
-Patch11: kernel-5.12.patch
-Patch12: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
-Patch13: https://build.opensuse.org/source/home:luc14n0:nvidia/nvidia-gfxG04/kernel-5.14.patch
+Patch10: 0001-backport-error-on-unknown-conftests.patch
+Patch11: 0002-backport-error-on-unknown-conftests-uvm-part.patch
+Patch12: do-div-cast.patch
+Patch13: kernel-5.7.0-set-memory-array.patch
+Patch14: kernel-5.12.patch
+Patch15: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -44,6 +46,7 @@ Patch31: use-kbuild-flags.patch
 Patch32: use-kbuild-gcc-plugins.patch
 Patch33: conftest-verbose.patch
 Patch34: cc_version_check-gcc5.patch
+Patch35: bashisms.patch
 #These are Debian specific. Dones not apply to Fedora
 #Patch35: nvidia-use-ARCH.o_binary.patch
 #Patch36: nvidia-modeset-use-ARCH.o_binary.patch
@@ -77,18 +80,21 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
 %patch10 -p1 -b 10 -d kernel
-%patch11 -p2 -b 11 -d kernel
-%patch12 -p2 -b 12 -d kernel
-%patch13 -p2 -b 12 -d kernel
+%patch11 -p1 -b 11 -d kernel
+%patch12 -p1 -b 12 -d kernel
+%patch13 -p1 -b 13 -d kernel
+%patch14 -p2 -b 14 -d kernel
+%patch15 -p2 -b 15 -d kernel
 %patch30 -p1 -b 30 -d kernel
 %patch31 -p1 -b 31 -d kernel
 %patch32 -p1 -b 32 -d kernel
 %patch33 -p1 -b 33 -d kernel
 %patch34 -p1 -b 34 -d kernel
+%patch35 -p1 -b 35 -d kernel
 %patch40 -p1 -b 40 -d kernel
 %patch41 -p1 -b 41 -d kernel
 %patch42 -p1 -b 42 -d kernel
-%patch43 -p1 -b 42 -d kernel
+%patch43 -p1 -b 43 -d kernel
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -115,6 +121,9 @@ done
 
 
 %changelog
+* Sat Jan 29 2022 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.147-1
+- Update to 390.147
+
 * Wed Sep 22 2021 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.144-3
 - Kernel 5.14 patch taken from openSUSE
 
