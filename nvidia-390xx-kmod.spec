@@ -80,7 +80,9 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
 %patch10 -p1 -b 10 -d kernel
+%ifnarch armv7hl
 %patch11 -p1 -b 11 -d kernel
+%endif
 %patch12 -p1 -b 12 -d kernel
 %patch13 -p1 -b 13 -d kernel
 %patch14 -p2 -b 14 -d kernel
