@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.147
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -39,6 +39,7 @@ Patch12: do-div-cast.patch
 Patch13: kernel-5.7.0-set-memory-array.patch
 Patch14: kernel-5.12.patch
 Patch15: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
+Patch16: nvidia-470xx-fix-linux-5.17.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -87,6 +88,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch13 -p1 -b 13 -d kernel
 %patch14 -p2 -b 14 -d kernel
 %patch15 -p2 -b 15 -d kernel
+%patch16 -p2 -b 15 -d kernel
 %patch30 -p1 -b 30 -d kernel
 %patch31 -p1 -b 31 -d kernel
 %patch32 -p1 -b 32 -d kernel
@@ -123,6 +125,9 @@ done
 
 
 %changelog
+* Wed Apr 20 2022 Sérgio Basto <sergio@serjux.com> - 3:390.147-3
+- Try to fix linux-5.17 based on patch provided on https://bugzilla.rpmfusion.org/6263
+
 * Thu Feb 10 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.147-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
