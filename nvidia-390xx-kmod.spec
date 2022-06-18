@@ -93,12 +93,12 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 #patch14 -p2 -b 14 -d kernel
 #patch15 -p2 -b 15 -d kernel
 #patch16 -p2 -b 15 -d kernel
-%patch17 -p1 -b 17 -d kernel
-%patch18 -p1 -b 18 -d kernel
+%patch17 -p2 -b 17 -d kernel
+%patch18 -p2 -b 18 -d kernel
 
 %patch30 -p1 -b 30 -d kernel
-%patch31 -p1 -b 31 -d kernel
-%patch32 -p1 -b 32 -d kernel
+#patch31 -p1 -b 31 -d kernel
+#patch32 -p1 -b 32 -d kernel
 %patch33 -p1 -b 33 -d kernel
 %patch34 -p1 -b 34 -d kernel
 %patch35 -p1 -b 35 -d kernel
