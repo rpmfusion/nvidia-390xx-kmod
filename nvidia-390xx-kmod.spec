@@ -16,9 +16,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.147
+Version:       390.151
 # Taken over by kmodtool
-Release:       3%{?dist}
+Release:       1%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -36,10 +36,14 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch10: 0001-backport-error-on-unknown-conftests.patch
 Patch11: 0002-backport-error-on-unknown-conftests-uvm-part.patch
 Patch12: do-div-cast.patch
-Patch13: kernel-5.7.0-set-memory-array.patch
-Patch14: kernel-5.12.patch
-Patch15: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
-Patch16: nvidia-470xx-fix-linux-5.17.patch
+#Patch13: kernel-5.7.0-set-memory-array.patch
+#Patch14: kernel-5.12.patch
+#Patch15: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
+#Patch16: nvidia-470xx-fix-linux-5.17.patch
+# http://git.pld-linux.org/gitweb.cgi?p=packages/xorg-driver-video-nvidia-legacy-390xx.git;a=blob_plain;f=kernel-5.18.patch;h=43cf468c1b7870f4042e2deafcc0ca80ef9bfd41;hb=70ee162314861b60f333d00d2485c2a7ac2fce4a
+Patch17: kernel-5.18.patch
+# http://git.pld-linux.org/gitweb.cgi?p=packages/xorg-driver-video-nvidia-legacy-390xx.git;a=blob;f=kernel-5.18-uvm.patch;h=cc02ee9a3d63c82418b91299608c4a9bbe04118b;hb=70ee162314861b60f333d00d2485c2a7ac2fce4a
+Patch18: kernel-5.18-uvm.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -85,10 +89,13 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch11 -p1 -b 11 -d kernel
 %endif
 %patch12 -p1 -b 12 -d kernel
-%patch13 -p1 -b 13 -d kernel
-%patch14 -p2 -b 14 -d kernel
-%patch15 -p2 -b 15 -d kernel
-%patch16 -p2 -b 15 -d kernel
+#patch13 -p1 -b 13 -d kernel
+#patch14 -p2 -b 14 -d kernel
+#patch15 -p2 -b 15 -d kernel
+#patch16 -p2 -b 15 -d kernel
+%patch17 -p1 -b 17 -d kernel
+%patch18 -p1 -b 18 -d kernel
+
 %patch30 -p1 -b 30 -d kernel
 %patch31 -p1 -b 31 -d kernel
 %patch32 -p1 -b 32 -d kernel
@@ -125,6 +132,9 @@ done
 
 
 %changelog
+* Sat Jun 18 2022 Henrik Nordstrom <henrik@henriknordstrom.net> - 390.151-1
+- Update to 390.151
+
 * Wed Apr 20 2022 Sérgio Basto <sergio@serjux.com> - 3:390.147-3
 - Try to fix linux-5.17 based on patch provided on https://bugzilla.rpmfusion.org/6263
 
