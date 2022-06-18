@@ -33,8 +33,8 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 #  openSUSE https://build.opensuse.org/package/show/home:luc14n0:nvidia/nvidia-gfxG04
 
 # kernel support
-Patch10: 0001-backport-error-on-unknown-conftests.patch
-Patch11: 0002-backport-error-on-unknown-conftests-uvm-part.patch
+#Patch10: 0001-backport-error-on-unknown-conftests.patch
+#Patch11: 0002-backport-error-on-unknown-conftests-uvm-part.patch
 Patch12: do-div-cast.patch
 #Patch13: kernel-5.7.0-set-memory-array.patch
 #Patch14: kernel-5.12.patch
@@ -84,9 +84,9 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
-%patch10 -p1 -b 10 -d kernel
+#patch10 -p1 -b 10 -d kernel
 %ifnarch armv7hl
-%patch11 -p1 -b 11 -d kernel
+#patch11 -p1 -b 11 -d kernel
 %endif
 %patch12 -p1 -b 12 -d kernel
 #patch13 -p1 -b 13 -d kernel
