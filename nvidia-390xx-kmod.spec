@@ -94,7 +94,9 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 #patch15 -p2 -b 15 -d kernel
 #patch16 -p2 -b 15 -d kernel
 %patch17 -p2 -b 17 -d kernel
+%ifnarch armv7hl
 %patch18 -p2 -b 18 -d kernel
+%endif
 
 %patch30 -p1 -b 30 -d kernel
 #patch31 -p1 -b 31 -d kernel
