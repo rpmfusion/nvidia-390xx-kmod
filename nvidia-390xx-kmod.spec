@@ -16,9 +16,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.151
+Version:       390.154
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       1%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -41,9 +41,9 @@ Patch12: do-div-cast.patch
 #Patch15: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
 #Patch16: nvidia-470xx-fix-linux-5.17.patch
 # http://git.pld-linux.org/gitweb.cgi?p=packages/xorg-driver-video-nvidia-legacy-390xx.git;a=blob_plain;f=kernel-5.18.patch;h=43cf468c1b7870f4042e2deafcc0ca80ef9bfd41;hb=70ee162314861b60f333d00d2485c2a7ac2fce4a
-Patch17: kernel-5.18.patch
+#Patch17: kernel-5.18.patch
 # http://git.pld-linux.org/gitweb.cgi?p=packages/xorg-driver-video-nvidia-legacy-390xx.git;a=blob;f=kernel-5.18-uvm.patch;h=cc02ee9a3d63c82418b91299608c4a9bbe04118b;hb=70ee162314861b60f333d00d2485c2a7ac2fce4a
-Patch18: kernel-5.18-uvm.patch
+#Patch18: kernel-5.18-uvm.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -93,9 +93,9 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 #patch14 -p2 -b 14 -d kernel
 #patch15 -p2 -b 15 -d kernel
 #patch16 -p2 -b 15 -d kernel
-%patch17 -p2 -b 17 -d kernel
+#%patch17 -p2 -b 17 -d kernel
 %ifnarch armv7hl
-%patch18 -p2 -b 18 -d kernel
+#%patch18 -p2 -b 18 -d kernel
 %endif
 
 %patch30 -p1 -b 30 -d kernel
@@ -134,6 +134,9 @@ done
 
 
 %changelog
+* Sun Aug 28 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-1
+- Update to 390.154 release
+
 * Mon Aug 08 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.151-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
