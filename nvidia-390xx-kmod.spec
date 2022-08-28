@@ -5,20 +5,20 @@
 # a new akmod package will only get build when a new one is actually needed
 %if 0%{?fedora}
 %bcond_with kmod
-%endif
 
 %if %{with kmod}
 %global buildforkernels current
 %else
 %global buildforkernels akmod
-%global debug_package %{nil}
 %endif
+%endif
+%global debug_package %{nil}
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.154
 # Taken over by kmodtool
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -134,6 +134,9 @@ done
 
 
 %changelog
+* Sun Aug 28 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-2
+- Restore kmod for el build
+
 * Sun Aug 28 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-1
 - Update to 390.154 release
 
