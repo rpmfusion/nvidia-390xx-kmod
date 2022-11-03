@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.154
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -33,28 +33,19 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 #  openSUSE https://build.opensuse.org/package/show/home:luc14n0:nvidia/nvidia-gfxG04
 
 # kernel support
-#Patch10: 0001-backport-error-on-unknown-conftests.patch
-#Patch11: 0002-backport-error-on-unknown-conftests-uvm-part.patch
 Patch12: do-div-cast.patch
-#Patch13: kernel-5.7.0-set-memory-array.patch
-#Patch14: kernel-5.12.patch
-#Patch15: https://gitlab.com/herecura/packages/nvidia-390xx-dkms/-/raw/herecura/kernel-5.13.patch
-#Patch16: nvidia-470xx-fix-linux-5.17.patch
-# http://git.pld-linux.org/gitweb.cgi?p=packages/xorg-driver-video-nvidia-legacy-390xx.git;a=blob_plain;f=kernel-5.18.patch;h=43cf468c1b7870f4042e2deafcc0ca80ef9bfd41;hb=70ee162314861b60f333d00d2485c2a7ac2fce4a
-#Patch17: kernel-5.18.patch
-# http://git.pld-linux.org/gitweb.cgi?p=packages/xorg-driver-video-nvidia-legacy-390xx.git;a=blob;f=kernel-5.18-uvm.patch;h=cc02ee9a3d63c82418b91299608c4a9bbe04118b;hb=70ee162314861b60f333d00d2485c2a7ac2fce4a
-#Patch18: kernel-5.18-uvm.patch
+Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
+Patch14: 0019-backport-acpi-changes-from-430.09.patch
+Patch15: 0020-backport-acpi-changes-from-455.23.04.patch
+Patch16: 0021-backport-acpi-changes-from-510.85.02.patch
+Patch17: 0022-backport-acpi-changes-from-515.65.01.patch
+Patch18: 0023-backport-drm_frambuffer.h-changes-from-515.76.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
-Patch31: use-kbuild-flags.patch
-Patch32: use-kbuild-gcc-plugins.patch
-Patch33: conftest-verbose.patch
-Patch34: cc_version_check-gcc5.patch
-Patch35: bashisms.patch
-#These are Debian specific. Dones not apply to Fedora
-#Patch35: nvidia-use-ARCH.o_binary.patch
-#Patch36: nvidia-modeset-use-ARCH.o_binary.patch
+Patch31: conftest-verbose.patch
+Patch32: cc_version_check-gcc5.patch
+Patch33: bashisms.patch
 
 # armhf support
 Patch40: include-swiotlb-header-on-arm.patch
@@ -84,30 +75,24 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
-#patch10 -p1 -b 10 -d kernel
-%ifnarch armv7hl
-#patch11 -p1 -b 11 -d kernel
-%endif
 %patch12 -p1 -b 12 -d kernel
-#patch13 -p1 -b 13 -d kernel
-#patch14 -p2 -b 14 -d kernel
-#patch15 -p2 -b 15 -d kernel
-#patch16 -p2 -b 15 -d kernel
-#%patch17 -p2 -b 17 -d kernel
-%ifnarch armv7hl
-#%patch18 -p2 -b 18 -d kernel
-%endif
+%patch13 -p1 -b 13 -d kernel
+%patch14 -p1 -b 14 -d kernel
+%patch15 -p1 -b 15 -d kernel
+%patch16 -p1 -b 16 -d kernel
+%patch17 -p1 -b 17 -d kernel
+%patch18 -p1 -b 18 -d kernel
 
 %patch30 -p1 -b 30 -d kernel
-#patch31 -p1 -b 31 -d kernel
-#patch32 -p1 -b 32 -d kernel
+%patch31 -p1 -b 31 -d kernel
+%patch32 -p1 -b 32 -d kernel
 %patch33 -p1 -b 33 -d kernel
-%patch34 -p1 -b 34 -d kernel
-%patch35 -p1 -b 35 -d kernel
+%ifarch armv7hl
 %patch40 -p1 -b 40 -d kernel
 %patch41 -p1 -b 41 -d kernel
 %patch42 -p1 -b 42 -d kernel
 %patch43 -p1 -b 43 -d kernel
+%endif
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -134,6 +119,10 @@ done
 
 
 %changelog
+* Thu Nov 03 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-3
+- Patch for 6.0 kernel
+- Clean up old patches
+
 * Sun Aug 28 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-2
 - Restore kmod for el build
 
