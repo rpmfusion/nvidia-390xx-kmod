@@ -16,9 +16,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.154
+Version:       390.157
 # Taken over by kmodtool
-Release:       3%{?dist}
+Release:       1%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -35,11 +35,13 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 # kernel support
 Patch12: do-div-cast.patch
 Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
-Patch14: 0019-backport-acpi-changes-from-430.09.patch
-Patch15: 0020-backport-acpi-changes-from-455.23.04.patch
-Patch16: 0021-backport-acpi-changes-from-510.85.02.patch
-Patch17: 0022-backport-acpi-changes-from-515.65.01.patch
-Patch18: 0023-backport-drm_frambuffer.h-changes-from-515.76.patch
+#Patch14: 0019-backport-acpi-changes-from-430.09.patch
+#Patch15: 0020-backport-acpi-changes-from-455.23.04.patch
+#Patch16: 0021-backport-acpi-changes-from-510.85.02.patch
+#Patch17: 0022-backport-acpi-changes-from-515.65.01.patch
+#Patch18: 0023-backport-drm_frambuffer.h-changes-from-515.76.patch
+#Copied from Arch
+Patch19: kernel-4.16+-memory-encryption.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -77,11 +79,12 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # Apply patches
 %patch12 -p1 -b 12 -d kernel
 %patch13 -p1 -b 13 -d kernel
-%patch14 -p1 -b 14 -d kernel
-%patch15 -p1 -b 15 -d kernel
-%patch16 -p1 -b 16 -d kernel
-%patch17 -p1 -b 17 -d kernel
-%patch18 -p1 -b 18 -d kernel
+#patch14 -p1 -b 14 -d kernel
+#patch15 -p1 -b 15 -d kernel
+#patch16 -p1 -b 16 -d kernel
+#patch17 -p1 -b 17 -d kernel
+#patch18 -p1 -b 18 -d kernel
+%patch19 -p1 -b 19
 
 %patch30 -p1 -b 30 -d kernel
 %patch31 -p1 -b 31 -d kernel
@@ -119,6 +122,9 @@ done
 
 
 %changelog
+* Sat Jan 07 2023 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.157-1
+- Update to 390.157
+
 * Thu Nov 03 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-3
 - Patch for 6.0 kernel
 - Clean up old patches
