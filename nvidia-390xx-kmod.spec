@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -48,6 +48,8 @@ Patch30: use-kbuild-compiler.patch
 Patch31: conftest-verbose.patch
 Patch32: cc_version_check-gcc5.patch
 Patch33: bashisms.patch
+# https://gist.github.com/joanbm/963906fc6772d8955faf1b9cc46c6b04
+Patch34: kernel-6.2.patch
 
 # armhf support
 Patch40: include-swiotlb-header-on-arm.patch
@@ -77,24 +79,25 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
-%patch12 -p1 -b 12 -d kernel
-%patch13 -p1 -b 13 -d kernel
+%patch -p1 -b 12 -d kernel -P12
+%patch -p1 -b 13 -d kernel -P13
 #patch14 -p1 -b 14 -d kernel
 #patch15 -p1 -b 15 -d kernel
 #patch16 -p1 -b 16 -d kernel
 #patch17 -p1 -b 17 -d kernel
 #patch18 -p1 -b 18 -d kernel
-%patch19 -p1 -b 19
+%patch -p1 -b 19 -P19
 
-%patch30 -p1 -b 30 -d kernel
-%patch31 -p1 -b 31 -d kernel
-%patch32 -p1 -b 32 -d kernel
-%patch33 -p1 -b 33 -d kernel
+%patch -p1 -b 30 -d kernel -P30
+%patch -p1 -b 31 -d kernel -P31
+%patch -p1 -b 32 -d kernel -P32
+%patch -p1 -b 33 -d kernel -P33
+%patch -p1 -b 34 -d kernel -P34
 %ifarch armv7hl
-%patch40 -p1 -b 40 -d kernel
-%patch41 -p1 -b 41 -d kernel
-%patch42 -p1 -b 42 -d kernel
-%patch43 -p1 -b 43 -d kernel
+%patch -p1 -b 40 -d kernel -P40
+%patch -p1 -b 41 -d kernel -P41
+%patch -p1 -b 42 -d kernel -P42
+%patch -p1 -b 43 -d kernel -P43
 %endif
 
 for kernel_version  in %{?kernel_versions} ; do
@@ -122,6 +125,9 @@ done
 
 
 %changelog
+* Sat Mar 25 2023 Ali Erdinc Koroglu <aekoroglu@fedoraproject.org> - 3:390.157-2
+- Patch for kernel 6.2
+
 * Sat Jan 07 2023 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.157-1
 - Update to 390.157
 
