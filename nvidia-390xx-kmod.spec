@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       1%{?dist}
+Release:       2%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -42,6 +42,7 @@ Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
 #Patch18: 0023-backport-drm_frambuffer.h-changes-from-515.76.patch
 #Copied from Arch
 Patch19: kernel-4.16+-memory-encryption.patch
+Patch20: nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -85,6 +86,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 #patch17 -p1 -b 17 -d kernel
 #patch18 -p1 -b 18 -d kernel
 %patch19 -p1 -b 19
+%patch20 -p1 -b 20
 
 %patch30 -p1 -b 30 -d kernel
 %patch31 -p1 -b 31 -d kernel
@@ -122,6 +124,9 @@ done
 
 
 %changelog
+* Wed Apr 12 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-2
+- Add patch for kernel >= 6.2
+
 * Sat Jan 07 2023 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.157-1
 - Update to 390.157
 
