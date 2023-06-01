@@ -1,4 +1,4 @@
-From 051a24b3b4e6e6a617dea98184b598e3039e7db9 Mon Sep 17 00:00:00 2001
+From bf78b6170c83d556d318efa7197398c2442d776b Mon Sep 17 00:00:00 2001
 From: NVieville <nicolas.vieville@uphf.fr>
 Date: Wed, 12 Apr 2023 12:14:39 +0200
 Subject: [PATCH] Fix build for kernel 6.2.x
@@ -7,8 +7,9 @@ Signed-off-by: NVieville <nicolas.vieville@uphf.fr>
 ---
  kernel/nvidia-drm/nvidia-drm-connector.c | 21 +++++++++++++++++++++
  kernel/nvidia-drm/nvidia-drm-drv.c       |  4 ++++
+ kernel/nvidia-drm/nvidia-drm-fb.c        |  1 +
  kernel/nvidia/nv-acpi.c                  | 19 +++++++++++++++++++
- 3 files changed, 44 insertions(+)
+ 4 files changed, 45 insertions(+)
 
 diff --git a/kernel/nvidia-drm/nvidia-drm-connector.c b/kernel/nvidia-drm/nvidia-drm-connector.c
 index 54167a7..9585840 100644
@@ -81,6 +82,18 @@ index 1289cb3..ca03978 100644
  
      dev->mode_config.async_page_flip = false;
  
+diff --git a/kernel/nvidia-drm/nvidia-drm-fb.c b/kernel/nvidia-drm/nvidia-drm-fb.c
+index 725164a..e0b94f2 100644
+--- a/kernel/nvidia-drm/nvidia-drm-fb.c
++++ b/kernel/nvidia-drm/nvidia-drm-fb.c
+@@ -31,6 +31,7 @@
+ #include "nvidia-drm-gem.h"
+ 
+ #include <drm/drm_crtc_helper.h>
++#include <drm/drm_modeset_helper.h>
+ 
+ static void nv_drm_framebuffer_destroy(struct drm_framebuffer *fb)
+ {
 diff --git a/kernel/nvidia/nv-acpi.c b/kernel/nvidia/nv-acpi.c
 index b37c9f3..06056a4 100644
 --- a/kernel/nvidia/nv-acpi.c
@@ -156,5 +169,5 @@ index b37c9f3..06056a4 100644
  
  static void nv_acpi_event(acpi_handle handle, u32 event_type, void *data)
 -- 
-2.39.2
+2.40.1
 

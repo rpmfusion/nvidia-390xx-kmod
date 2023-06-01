@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       2%{?dist}
+Release:       3%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -43,6 +43,8 @@ Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
 #Copied from Arch
 Patch19: kernel-4.16+-memory-encryption.patch
 Patch20: nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
+Patch21: nvidia-390xx-kmod-0025-kernel-6.3-adaptation.patch
+Patch22: nvidia-390xx-kmod-0026-kernel-6.4-adaptation.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -78,25 +80,27 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
-%patch12 -p1 -b 12 -d kernel
-%patch13 -p1 -b 13 -d kernel
-#patch14 -p1 -b 14 -d kernel
-#patch15 -p1 -b 15 -d kernel
-#patch16 -p1 -b 16 -d kernel
-#patch17 -p1 -b 17 -d kernel
-#patch18 -p1 -b 18 -d kernel
-%patch19 -p1 -b 19
-%patch20 -p1 -b 20
+%patch -P 12 -p1 -b 12 -d kernel
+%patch -P 13 -p1 -b 13 -d kernel
+#patch -P 14 -p1 -b 14 -d kernel
+#patch -P 15 -p1 -b 15 -d kernel
+#patch -P 16 -p1 -b 16 -d kernel
+#patch -P 17 -p1 -b 17 -d kernel
+#patch -P 18 -p1 -b 18 -d kernel
+%patch -P 19 -p1 -b 19
+%patch -P 20 -p1 -b 20
+%patch -P 21 -p1 -b 21
+%patch -P 22 -p1 -b 22
 
-%patch30 -p1 -b 30 -d kernel
-%patch31 -p1 -b 31 -d kernel
-%patch32 -p1 -b 32 -d kernel
-%patch33 -p1 -b 33 -d kernel
+%patch -P 30 -p1 -b 30 -d kernel
+%patch -P 31 -p1 -b 31 -d kernel
+%patch -P 32 -p1 -b 32 -d kernel
+%patch -P 33 -p1 -b 33 -d kernel
 %ifarch armv7hl
-%patch40 -p1 -b 40 -d kernel
-%patch41 -p1 -b 41 -d kernel
-%patch42 -p1 -b 42 -d kernel
-%patch43 -p1 -b 43 -d kernel
+%patch -P 40 -p1 -b 40 -d kernel
+%patch -P 41 -p1 -b 41 -d kernel
+%patch -P 42 -p1 -b 42 -d kernel
+%patch -P 43 -p1 -b 43 -d kernel
 %endif
 
 for kernel_version  in %{?kernel_versions} ; do
@@ -124,6 +128,12 @@ done
 
 
 %changelog
+* Thu Jun 01 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-3
+- Fix patch for kernel >= 6.2
+- Add patch for kernel >= 6.3
+- Add patch for kernel >= 6.4
+- SPEC file - Fix patchN macro is deprecated
+
 * Wed Apr 12 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-2
 - Add patch for kernel >= 6.2
 
