@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       4%{?dist}
+Release:       5%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -35,11 +35,6 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 # kernel support
 Patch12: do-div-cast.patch
 Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
-#Patch14: 0019-backport-acpi-changes-from-430.09.patch
-#Patch15: 0020-backport-acpi-changes-from-455.23.04.patch
-#Patch16: 0021-backport-acpi-changes-from-510.85.02.patch
-#Patch17: 0022-backport-acpi-changes-from-515.65.01.patch
-#Patch18: 0023-backport-drm_frambuffer.h-changes-from-515.76.patch
 #Copied from Arch
 Patch19: kernel-4.16+-memory-encryption.patch
 Patch20: nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
@@ -57,6 +52,10 @@ Patch40: include-swiotlb-header-on-arm.patch
 Patch41: ignore_xen_on_arm.patch
 Patch42: arm-outer-sync.patch
 Patch43: nvidia-drm-arm-cflags.patch
+
+# Ubuntu patch
+Patch50: buildfix_kernel_6.5-garbage-collect-all-references-to-get_user.patch
+Patch51: buildfix_kernel_6.5-handle-get_user_pages-vmas-argument-remova.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64 armv7hl
@@ -82,11 +81,6 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 # Apply patches
 %patch -P 12 -p1 -b 12 -d kernel
 %patch -P 13 -p1 -b 13 -d kernel
-#patch -P 14 -p1 -b 14 -d kernel
-#patch -P 15 -p1 -b 15 -d kernel
-#patch -P 16 -p1 -b 16 -d kernel
-#patch -P 17 -p1 -b 17 -d kernel
-#patch -P 18 -p1 -b 18 -d kernel
 %patch -P 19 -p1 -b 19
 %patch -P 20 -p1 -b 20
 %patch -P 21 -p1 -b 21
@@ -102,6 +96,8 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 42 -p1 -b 42 -d kernel
 %patch -P 43 -p1 -b 43 -d kernel
 %endif
+%patch -P 50 -p1 -b 50 -d kernel
+%patch -P 51 -p1 -b 51 -d kernel
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
@@ -128,6 +124,9 @@ done
 
 
 %changelog
+* Tue Sep 12 2023 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-5
+- Add patch for kernel >= 6.5
+
 * Thu Aug 03 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
 
