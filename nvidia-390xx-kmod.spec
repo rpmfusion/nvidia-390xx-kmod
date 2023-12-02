@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       5%{?dist}
+Release:       6%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -42,6 +42,8 @@ Patch21: nvidia-390xx-kmod-0025-kernel-6.3-adaptation.patch
 Patch22: nvidia-390xx-kmod-0026-kernel-6.4-adaptation.patch
 Patch23: nvidia-390xx-kmod-0027-kernel-6.5-garbage-collect-all-references-to-get_user.patch
 Patch24: nvidia-390xx-kmod-0028-kernel-6.5-handle-get_user_pages-vmas-argument-remova.patch
+Patch25: nvidia-390xx-kmod-0029-kernel-6.6-backport-drm_gem_prime_handle_to_fd-changes-from-470.patch
+Patch26: nvidia-390xx-kmod-0030-kernel-6.6-refuse-to-load-legacy-module-if-IBT-is-enabled.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -85,6 +87,8 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 22 -p1 -b 22
 %patch -P 23 -p1 -b 23 -d kernel
 %patch -P 24 -p1 -b 24 -d kernel
+%patch -P 25 -p1 -b 25 -d kernel
+%patch -P 26 -p1 -b 26 -d kernel
 
 %patch -P 30 -p1 -b 30 -d kernel
 %patch -P 31 -p1 -b 31 -d kernel
@@ -122,6 +126,11 @@ done
 
 
 %changelog
+* Sat Dec 02 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-6
+- Renamed kernel 6.5 patches
+- Add patch for kernel >= 6.6 - RFBZ#6802
+- Add patch for disabling module loading when Indirect Branch Tracking is active
+
 * Tue Sep 12 2023 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-5
 - Add patch for kernel >= 6.5
 
