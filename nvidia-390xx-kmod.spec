@@ -40,6 +40,8 @@ Patch19: kernel-4.16+-memory-encryption.patch
 Patch20: nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
 Patch21: nvidia-390xx-kmod-0025-kernel-6.3-adaptation.patch
 Patch22: nvidia-390xx-kmod-0026-kernel-6.4-adaptation.patch
+Patch23: nvidia-390xx-kmod-0027-kernel-6.5-garbage-collect-all-references-to-get_user.patch
+Patch24: nvidia-390xx-kmod-0028-kernel-6.5-handle-get_user_pages-vmas-argument-remova.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -52,10 +54,6 @@ Patch40: include-swiotlb-header-on-arm.patch
 Patch41: ignore_xen_on_arm.patch
 Patch42: arm-outer-sync.patch
 Patch43: nvidia-drm-arm-cflags.patch
-
-# Ubuntu patch
-Patch50: buildfix_kernel_6.5-garbage-collect-all-references-to-get_user.patch
-Patch51: buildfix_kernel_6.5-handle-get_user_pages-vmas-argument-remova.patch
 
 # needed for plague to make sure it builds for i586 and i686
 ExclusiveArch:  i686 x86_64 armv7hl
@@ -85,6 +83,8 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 20 -p1 -b 20
 %patch -P 21 -p1 -b 21
 %patch -P 22 -p1 -b 22
+%patch -P 23 -p1 -b 23 -d kernel
+%patch -P 24 -p1 -b 24 -d kernel
 
 %patch -P 30 -p1 -b 30 -d kernel
 %patch -P 31 -p1 -b 31 -d kernel
@@ -96,8 +96,6 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 42 -p1 -b 42 -d kernel
 %patch -P 43 -p1 -b 43 -d kernel
 %endif
-%patch -P 50 -p1 -b 50 -d kernel
-%patch -P 51 -p1 -b 51 -d kernel
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
