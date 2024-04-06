@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       7%{?dist}
+Release:       8%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -44,6 +44,7 @@ Patch23: nvidia-390xx-kmod-0027-kernel-6.5-garbage-collect-all-references-to-get
 Patch24: nvidia-390xx-kmod-0028-kernel-6.5-handle-get_user_pages-vmas-argument-remova.patch
 Patch25: nvidia-390xx-kmod-0029-kernel-6.6-backport-drm_gem_prime_handle_to_fd-changes-from-470.patch
 Patch26: nvidia-390xx-kmod-0030-kernel-6.6-refuse-to-load-legacy-module-if-IBT-is-enabled.patch
+Patch27: nvidia-390xx-kmod-0031-kernel-6.8-adaptation.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -89,6 +90,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 24 -p1 -b 24 -d kernel
 %patch -P 25 -p1 -b 25 -d kernel
 %patch -P 26 -p1 -b 26 -d kernel
+%patch -P 27 -p1 -b 27 -d kernel
 
 %patch -P 30 -p1 -b 30 -d kernel
 %patch -P 31 -p1 -b 31 -d kernel
@@ -126,6 +128,9 @@ done
 
 
 %changelog
+* Sat Apr 06 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-8
+- Add patch for kernel >= 6.8
+
 * Sun Feb 04 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
 
