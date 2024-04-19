@@ -1,0 +1,12 @@
+diff --git a/nvidia-uvm/uvm8_perf_prefetch.c b/nvidia-uvm/uvm8_perf_prefetch.c
+index 4f390ee..8206d63 100644
+--- a/nvidia-uvm/uvm8_perf_prefetch.c
++++ b/nvidia-uvm/uvm8_perf_prefetch.c
+@@ -28,6 +28,7 @@
+ #include "uvm8_kvmalloc.h"
+ #include "uvm8_va_block.h"
+ #include "uvm8_va_range.h"
++#include "uvm8_test.h"
+ 
+ // Global cache to allocate the per-VA block prefetch detection structures
+ static struct kmem_cache *g_prefetch_info_cache __read_mostly;

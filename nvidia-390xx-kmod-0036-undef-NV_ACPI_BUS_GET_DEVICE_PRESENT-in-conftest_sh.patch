@@ -1,0 +1,23 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..96b289b 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -4451,12 +4451,13 @@ compile_test() {
+             # ("ACPI: bus: Eliminate acpi_bus_get_device()") in
+             # v5.18-rc2 (2022-04-05).
+             #
+-            CODE="
++            #CODE="
+             #include <linux/acpi.h>
+-            int conftest_acpi_bus_get_device(void) {
+-                return acpi_bus_get_device();
+-            }"
+-            compile_check_conftest "$CODE" "NV_ACPI_BUS_GET_DEVICE_PRESENT" "" "functions"
++            #int conftest_acpi_bus_get_device(void) {
++            #    return acpi_bus_get_device();
++            #}"
++            #compile_check_conftest "$CODE" "NV_ACPI_BUS_GET_DEVICE_PRESENT" "" "functions"
++            echo "#undef NV_ACPI_BUS_GET_DEVICE_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         dma_resv_add_fence)

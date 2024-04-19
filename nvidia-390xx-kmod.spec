@@ -36,15 +36,72 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 Patch12: do-div-cast.patch
 Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
 #Copied from Arch
-Patch19: kernel-4.16+-memory-encryption.patch
-Patch20: nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
-Patch21: nvidia-390xx-kmod-0025-kernel-6.3-adaptation.patch
-Patch22: nvidia-390xx-kmod-0026-kernel-6.4-adaptation.patch
-Patch23: nvidia-390xx-kmod-0027-kernel-6.5-garbage-collect-all-references-to-get_user.patch
-Patch24: nvidia-390xx-kmod-0028-kernel-6.5-handle-get_user_pages-vmas-argument-remova.patch
-Patch25: nvidia-390xx-kmod-0029-kernel-6.6-backport-drm_gem_prime_handle_to_fd-changes-from-470.patch
-Patch26: nvidia-390xx-kmod-0030-kernel-6.6-refuse-to-load-legacy-module-if-IBT-is-enabled.patch
-Patch27: nvidia-390xx-kmod-0031-kernel-6.8-adaptation.patch
+Patch19:  kernel-4.16+-memory-encryption.patch
+Patch20:  nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
+Patch21:  nvidia-390xx-kmod-0025-kernel-6.3-adaptation.patch
+Patch22:  nvidia-390xx-kmod-0026-kernel-6.4-adaptation.patch
+Patch23:  nvidia-390xx-kmod-0027-kernel-6.5-garbage-collect-all-references-to-get_user.patch
+Patch24:  nvidia-390xx-kmod-0028-kernel-6.5-handle-get_user_pages-vmas-argument-remova.patch
+Patch25:  nvidia-390xx-kmod-0029-kernel-6.6-backport-drm_gem_prime_handle_to_fd-changes-from-470.patch
+Patch26:  nvidia-390xx-kmod-0030-kernel-6.6-refuse-to-load-legacy-module-if-IBT-is-enabled.patch
+Patch27:  nvidia-390xx-kmod-0031-kernel-6.8-adaptation.patch
+Patch28:  nvidia-390xx-kmod-0032-kernel-6.8-conftest_h-wait_on_bit_lock.patch
+Patch29:  nvidia-390xx-kmod-0033-kernel-5.6-ioremap_nocache_removed.patch
+Patch100: nvidia-390xx-kmod-0034-kernel-5.9-dma_is_direct-removed.patch
+Patch101: nvidia-390xx-kmod-0035-gcc14-no-previous-prototype-for-nv_load_dma_map_scatterlist.patch
+Patch102: nvidia-390xx-kmod-0036-undef-NV_ACPI_BUS_GET_DEVICE_PRESENT-in-conftest_sh.patch
+Patch103: nvidia-390xx-kmod-0037-add-RPM_CFLAGS-setup-in-conftest_sh.patch
+Patch104: nvidia-390xx-kmod-0038-workaround-NV_EFI_ENABLED-macro.patch
+Patch105: nvidia-390xx-kmod-0039-incompatible-function-type-nv_gpu_numa_c.patch
+Patch106: nvidia-390xx-kmod-0040-fix-fallthrough-warning-nv_mmap_c.patch
+Patch107: nvidia-390xx-kmod-0041-no-previous-prototype-for-exercise_error_forwarding_va.patch
+Patch108: nvidia-390xx-kmod-0042-undef-NV_DO_GETTIMEOFDAY_PRESENT-in-conftest_sh.patch
+Patch109: nvidia-390xx-kmod-0043-undef-NV_SET_MEMORY_ARRAY_UC_PRESENT-in-conftest_sh.patch
+Patch110: nvidia-390xx-kmod-0044-undef-NV_ACQUIRE_CONSOLE_SEM_PRESENT-in-conftest_sh.patch
+Patch111: nvidia-390xx-kmod-0045-undef-NV_UNSAFE_FOLLOW_PFN_PRESENT-in-conftest_sh.patch
+Patch112: nvidia-390xx-kmod-0046-undef-NV_JIFFIES_TO_TIMESPEC_PRESENT-in-conftest_sh.patch
+Patch113: nvidia-390xx-kmod-0047-undef-NV_PNV_NPU2_INIT_CONTEXT_PRESENT-in-conftest_sh.patch
+Patch114: nvidia-390xx-kmod-0048-fix-atomic64-include-in-conftest_sh.patch
+Patch115: nvidia-390xx-kmod-0049-fix-dma_buf_map-renamed-to-iosys_map.patch
+Patch116: nvidia-390xx-kmod-0050-no-previous-prototype-for-nv_pci_register_driver.patch
+Patch117: nvidia-390xx-kmod-0051-no-previous-prototype-for-nvidia_init_exit_module-in-nv_c.patch
+Patch118: nvidia-390xx-kmod-0052-no-previous-prototype-for-on_nv_assert.patch
+Patch119: nvidia-390xx-kmod-0053-no-previous-prototype-for-_raw_q_flush.patch
+Patch120: nvidia-390xx-kmod-0054-no-previous-prototype-for-nv-ibmnpu-functions.patch
+Patch121: nvidia-390xx-kmod-0055-no-previous-prototype-for-uvm_tools_init_exit.patch
+Patch122: nvidia-390xx-kmod-0056-no-previous-prototype-for-uvm8_test_set_prefetch_filtering.patch
+Patch123: nvidia-390xx-kmod-0057-no-previous-prototype-in-uvm8_va_space_c.patch
+Patch124: nvidia-390xx-kmod-0058-no-previous-prototype-for-uvm_channel_manager_print_pending_pushes.patch
+Patch125: nvidia-390xx-kmod-0059-no-previous-prototype-in-uvm8_va_range_c.patch
+Patch126: nvidia-390xx-kmod-0060-no-previous-prototype-in-uvm8_range_group_c.patch
+Patch127: nvidia-390xx-kmod-0061-no-previous-prototype-in-uvm8_gpu_replayable_faults_c.patch
+Patch128: nvidia-390xx-kmod-0062-no-previous-prototype-for-block_map.patch
+Patch129: nvidia-390xx-kmod-0063-no-previous-prototype-for-try_get_ptes.patch
+Patch130: nvidia-390xx-kmod-0064-no-previous-prototype-in-uvm8_pushbuffer_c.patch
+Patch131: nvidia-390xx-kmod-0065-no-previous-prototype-in-uvm8_kepler_mmu_c.patch
+Patch132: nvidia-390xx-kmod-0066-no-previous-prototype-in-uvm8_pascal_mmu_c.patch
+Patch133: nvidia-390xx-kmod-0067-no-previous-prototype-for-parse_fault_entry_common.patch
+Patch134: nvidia-390xx-kmod-0068-no-previous-prototype-in-uvm8_volta_access_counter_buffer_c.patch
+Patch135: nvidia-390xx-kmod-0069-no-previous-prototype-for-va_block_set_read_duplication_locked.patch
+Patch136: nvidia-390xx-kmod-0070-no-previous-prototype-for-map_rm_pt_range.patch
+Patch137: nvidia-390xx-kmod-0071-no-previous-prototype-in-uvm8_user_channel_c.patch
+Patch138: nvidia-390xx-kmod-0072-no-previous-prototype-in-uvm8_perf_thrashing_c.patch
+Patch139: nvidia-390xx-kmod-0073-no-previous-prototype-in-uvm8_perf_prefetch_c.patch
+Patch140: nvidia-390xx-kmod-0074-no-previous-prototype-for-test_tracking.patch
+Patch141: nvidia-390xx-kmod-0075-no-previous-prototype-in-uvm8_page_tree_test_c.patch
+Patch142: nvidia-390xx-kmod-0076-no-previous-prototype-in-uvm8_tracker_test_c.patch
+Patch143: nvidia-390xx-kmod-0077-no-previous-prototype-in-uvm8_push_test_c.patch
+Patch144: nvidia-390xx-kmod-0078-no-previous-prototype-in-uvm8_channel_test_c.patch
+Patch145: nvidia-390xx-kmod-0079-no-previous-prototype-in-nvidia-modeset-linux_c.patch
+Patch146: nvidia-390xx-kmod-0080-fix-enum-implicit-conversion-from-uvm_fault_type_t-to-uvm_fault_access_type_t-in-uvm8_va_range_c.patch
+Patch147: nvidia-390xx-kmod-0081-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_replayable_faults_c.patch
+Patch148: nvidia-390xx-kmod-0082-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_non_replayable_faults_c.patch
+Patch149: nvidia-390xx-kmod-0083-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_va_block_c.patch
+Patch150: nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
+Patch151: nvidia-390xx-kmod-0085-undef-NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT-in-conftest_sh.patch
+Patch152: nvidia-390xx-kmod-0086-undef-NV_DRM_CONNECTOR_FUNCS_HAVE_MODE_IN_NAME-in-conftest_sh.patch
+Patch153: nvidia-390xx-kmod-0087-undef-NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT-in-conftest_sh.patch
+Patch154: nvidia-390xx-kmod-0088-undef-NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESENT-in-conftest_sh.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -91,6 +148,63 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 25 -p1 -b 25 -d kernel
 %patch -P 26 -p1 -b 26 -d kernel
 %patch -P 27 -p1 -b 27 -d kernel
+%patch -P 28 -p1 -b 28 -d kernel
+%patch -P 29 -p1 -b 29 -d kernel
+%patch -P 100 -p1 -b 100 -d kernel
+%patch -P 101 -p1 -b 101 -d kernel
+%patch -P 102 -p1 -b 102 -d kernel
+%patch -P 103 -p1 -b 103 -d kernel
+%patch -P 104 -p1 -b 104 -d kernel
+%patch -P 105 -p1 -b 105 -d kernel
+%patch -P 106 -p1 -b 106 -d kernel
+%patch -P 107 -p1 -b 107 -d kernel
+%patch -P 108 -p1 -b 108 -d kernel
+%patch -P 109 -p1 -b 109 -d kernel
+%patch -P 110 -p1 -b 110 -d kernel
+%patch -P 111 -p1 -b 111 -d kernel
+%patch -P 112 -p1 -b 112 -d kernel
+%patch -P 113 -p1 -b 113 -d kernel
+%patch -P 114 -p1 -b 114 -d kernel
+%patch -P 115 -p1 -b 115 -d kernel
+%patch -P 116 -p1 -b 116 -d kernel
+%patch -P 117 -p1 -b 117 -d kernel
+%patch -P 118 -p1 -b 118 -d kernel
+%patch -P 119 -p1 -b 119 -d kernel
+%patch -P 120 -p1 -b 120 -d kernel
+%patch -P 121 -p1 -b 121 -d kernel
+%patch -P 122 -p1 -b 122 -d kernel
+%patch -P 123 -p1 -b 123 -d kernel
+%patch -P 124 -p1 -b 124 -d kernel
+%patch -P 125 -p1 -b 125 -d kernel
+%patch -P 126 -p1 -b 126 -d kernel
+%patch -P 127 -p1 -b 127 -d kernel
+%patch -P 128 -p1 -b 128 -d kernel
+%patch -P 129 -p1 -b 129 -d kernel
+%patch -P 130 -p1 -b 130 -d kernel
+%patch -P 131 -p1 -b 131 -d kernel
+%patch -P 132 -p1 -b 132 -d kernel
+%patch -P 133 -p1 -b 133 -d kernel
+%patch -P 134 -p1 -b 134 -d kernel
+%patch -P 135 -p1 -b 135 -d kernel
+%patch -P 136 -p1 -b 136 -d kernel
+%patch -P 137 -p1 -b 137 -d kernel
+%patch -P 138 -p1 -b 138 -d kernel
+%patch -P 139 -p1 -b 139 -d kernel
+%patch -P 140 -p1 -b 140 -d kernel
+%patch -P 141 -p1 -b 141 -d kernel
+%patch -P 142 -p1 -b 142 -d kernel
+%patch -P 143 -p1 -b 143 -d kernel
+%patch -P 144 -p1 -b 144 -d kernel
+%patch -P 145 -p1 -b 145 -d kernel
+%patch -P 146 -p1 -b 146 -d kernel
+%patch -P 147 -p1 -b 147 -d kernel
+%patch -P 148 -p1 -b 148 -d kernel
+%patch -P 149 -p1 -b 149 -d kernel
+%patch -P 150 -p1 -b 150 -d kernel
+%patch -P 151 -p1 -b 151 -d kernel
+%patch -P 152 -p1 -b 152 -d kernel
+%patch -P 153 -p1 -b 153 -d kernel
+%patch -P 154 -p1 -b 154 -d kernel
 
 %patch -P 30 -p1 -b 30 -d kernel
 %patch -P 31 -p1 -b 31 -d kernel
@@ -111,6 +225,7 @@ done
 for kernel_version in %{?kernel_versions}; do
   pushd _kmod_build_${kernel_version%%___*}/
     make V=1 %{?_smp_mflags} \
+	    RPM_CFLAGS="%{optflags}" \
         KERNEL_UNAME="${kernel_version%%___*}" SYSSRC="${kernel_version##*___}" \
         IGNORE_CC_MISMATCH=1 IGNORE_XEN_PRESENCE=1 IGNORE_PREEMPT_RT_PRESENCE=1 \
         module

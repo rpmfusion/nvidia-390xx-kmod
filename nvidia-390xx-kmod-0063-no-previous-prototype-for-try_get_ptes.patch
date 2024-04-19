@@ -1,0 +1,13 @@
+diff --git a/nvidia-uvm/uvm8_mmu.c b/nvidia-uvm/uvm8_mmu.c
+index 2b90a3c..86518f5 100644
+--- a/nvidia-uvm/uvm8_mmu.c
++++ b/nvidia-uvm/uvm8_mmu.c
+@@ -695,7 +695,7 @@ NV_STATUS uvm_page_tree_wait(uvm_page_tree_t *tree)
+     return status;
+ }
+ 
+-NV_STATUS try_get_ptes(uvm_page_tree_t *tree,
++static NV_STATUS try_get_ptes(uvm_page_tree_t *tree,
+                        NvU32 page_size,
+                        NvU64 start,
+                        NvLength size,

@@ -1,0 +1,12 @@
+diff --git a/nvidia-uvm/uvm8_kepler_mmu.c b/nvidia-uvm/uvm8_kepler_mmu.c
+index ba46019..c9a1660 100644
+--- a/nvidia-uvm/uvm8_kepler_mmu.c
++++ b/nvidia-uvm/uvm8_kepler_mmu.c
+@@ -40,6 +40,7 @@
+ #include "uvm8_mmu.h"
+ #include "uvm8_push_macros.h"
+ #include "hwref/kepler/gk104/dev_mmu.h"
++#include "uvm8_hal.h"
+ 
+ #define MMU_BIG 0
+ #define MMU_SMALL 1

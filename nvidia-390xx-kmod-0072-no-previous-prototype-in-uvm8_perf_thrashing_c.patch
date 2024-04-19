@@ -1,0 +1,12 @@
+diff --git a/nvidia-uvm/uvm8_perf_thrashing.c b/nvidia-uvm/uvm8_perf_thrashing.c
+index 0ed3b18..5d47b0e 100644
+--- a/nvidia-uvm/uvm8_perf_thrashing.c
++++ b/nvidia-uvm/uvm8_perf_thrashing.c
+@@ -29,6 +29,7 @@
+ #include "uvm8_va_range.h"
+ #include "uvm8_kvmalloc.h"
+ #include "uvm8_tools.h"
++#include "uvm8_test.h"
+ 
+ // Number of bits for page-granularity time stamps. Currently we ignore the first 6 bits
+ // of the timestamp (i.e. we have 64ns resolution, which is good enough)

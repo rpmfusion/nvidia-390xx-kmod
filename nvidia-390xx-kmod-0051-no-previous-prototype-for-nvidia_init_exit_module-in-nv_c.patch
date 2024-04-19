@@ -1,0 +1,20 @@
+diff --git a/nvidia/nv.c b/nvidia/nv.c
+index ad64e88..ef655d5 100644
+--- a/nvidia/nv.c
++++ b/nvidia/nv.c
+@@ -768,6 +768,7 @@ int nv_verify_cpa_interface(void)
+ }
+ #endif /* defined(NV_CHANGE_PAGE_ATTR_BUG_PRESENT) */
+ 
++int __init nvidia_init_module(void);
+ int __init nvidia_init_module(void)
+ {
+     NV_STATUS status;
+@@ -1165,6 +1166,7 @@ failed6:
+     return rc;
+ }
+ 
++void nvidia_exit_module(void);
+ void nvidia_exit_module(void)
+ {
+     nvidia_stack_t *sp = __nv_init_sp;

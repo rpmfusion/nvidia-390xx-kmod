@@ -1,0 +1,11 @@
+index ba57b86..9f7d8c1 100644
+--- a/nvidia/nvlink_linux.c
++++ b/nvidia/nvlink_linux.c
+@@ -30,6 +30,7 @@
+ #include "nv-linux.h"
+ #include "nv-procfs.h"
+ #include "nv-time.h"
++#include "nvlink_proto.h"
+ 
+ #define MAX_ERROR_STRING           512
+ 

@@ -1,0 +1,13 @@
+diff --git a/nvidia-uvm/uvm8_va_space.c b/nvidia-uvm/uvm8_va_space.c
+index 42b7bb9..0744d6b 100644
+--- a/nvidia-uvm/uvm8_va_space.c
++++ b/nvidia-uvm/uvm8_va_space.c
+@@ -34,6 +34,8 @@
+ #include "uvm_common.h"
+ #include "nv_uvm_interface.h"
+ #include "nv-kthread-q.h"
++#include "uvm8_api.h"
++#include "uvm8_test.h"
+ 
+ static NV_STATUS enable_peers(uvm_va_space_t *va_space, uvm_gpu_t *gpu_1, uvm_gpu_t *gpu_2);
+ static void disable_peers(uvm_va_space_t *va_space,

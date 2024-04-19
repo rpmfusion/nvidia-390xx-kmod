@@ -1,0 +1,14 @@
+diff --git a/nvidia/nv-ibmnpu.c b/nvidia/nv-ibmnpu.c
+index 50503e1..545d261 100644
+--- a/nvidia/nv-ibmnpu.c
++++ b/nvidia/nv-ibmnpu.c
+@@ -26,8 +26,8 @@
+  */
+ #include "nv-linux.h"
+ 
+-#if defined(NVCPU_PPC64LE)
+ #include "nv-ibmnpu.h"
++#if defined(NVCPU_PPC64LE)
+ 
+ #include "nvlink_common.h"
+ #include "nvlink_errors.h"

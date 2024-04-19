@@ -1,0 +1,17 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..b3865af 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -1906,7 +1906,11 @@ compile_test() {
+         atomic64_type)
+             # Determine if atomic64_t and associated functions are defined
+             CODE="
+-            #include <asm/atomic.h>
++            #include <linux/init.h>
++            #include <linux/bug.h>
++            #include <linux/kernel.h>
++            #include <linux/atomic.h>
++            #include <linux/module.h>
+             void conftest_atomic64(void) {
+                 atomic64_t data;
+                 atomic64_read(&data);

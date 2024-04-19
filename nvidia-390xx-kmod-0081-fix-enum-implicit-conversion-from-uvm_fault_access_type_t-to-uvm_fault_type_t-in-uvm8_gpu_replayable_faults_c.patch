@@ -1,0 +1,22 @@
+diff --git a/nvidia-uvm/uvm8_gpu_replayable_faults.c b/nvidia-uvm/uvm8_gpu_replayable_faults.c
+index f2279b6..e67e137 100644
+--- a/nvidia-uvm/uvm8_gpu_replayable_faults.c
++++ b/nvidia-uvm/uvm8_gpu_replayable_faults.c
+@@ -972,7 +972,7 @@ static uvm_fault_access_type_t check_fault_access_permissions(uvm_gpu_t *gpu,
+ 
+     perm_status = uvm_va_range_check_logical_permissions(va_block->va_range,
+                                                          gpu->id,
+-                                                         fault_entry->fault_access_type,
++                                                         (uvm_fault_type_t)fault_entry->fault_access_type,
+                                                          allow_migration);
+     if (perm_status == NV_OK)
+         return fault_entry->fault_access_type;
+@@ -995,7 +995,7 @@ static uvm_fault_access_type_t check_fault_access_permissions(uvm_gpu_t *gpu,
+         if (uvm_fault_access_type_mask_test(fault_entry->access_type_mask, UVM_FAULT_ACCESS_TYPE_READ)) {
+             perm_status = uvm_va_range_check_logical_permissions(va_block->va_range,
+                                                                  gpu->id,
+-                                                                 UVM_FAULT_ACCESS_TYPE_READ,
++                                                                 (uvm_fault_type_t)UVM_FAULT_ACCESS_TYPE_READ,
+                                                                  allow_migration);
+             if (perm_status == NV_OK)
+                 return UVM_FAULT_ACCESS_TYPE_READ;

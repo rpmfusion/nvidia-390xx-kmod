@@ -1,0 +1,30 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..58636bf 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -4152,7 +4152,7 @@ compile_test() {
+             # drm_gem_object_put_unlocked()") finally removes
+             # drm_gem_object_put_unlocked() macro.
+             #
+-            CODE="
++            #CODE="
+             #if defined(NV_DRM_DRMP_H_PRESENT)
+             #include <drm/drmP.h>
+             #endif
+@@ -4160,11 +4160,12 @@ compile_test() {
+             #if defined(NV_DRM_DRM_GEM_H_PRESENT)
+             #include <drm/drm_gem.h>
+             #endif
+-            void conftest_drm_gem_object_put_unlocked(void) {
+-                drm_gem_object_put_unlocked();
+-            }"
++            #void conftest_drm_gem_object_put_unlocked(void) {
++            #    drm_gem_object_put_unlocked();
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT" "" "functions"
++            echo "#undef NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         drm_display_mode_has_vrefresh)

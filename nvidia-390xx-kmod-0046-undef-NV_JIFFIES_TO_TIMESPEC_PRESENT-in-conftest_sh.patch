@@ -1,0 +1,23 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..289c0c1 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -2542,12 +2542,13 @@ compile_test() {
+             # removed by commit 751addac78b6
+             # ("y2038: remove obsolete jiffies conversion functions")
+             # in v5.6-rc1 (2019-12-13).
+-        CODE="
++        #CODE="
+         #include <linux/jiffies.h>
+-        void conftest_jiffies_to_timespec(void){
+-            jiffies_to_timespec();
+-        }"
+-            compile_check_conftest "$CODE" "NV_JIFFIES_TO_TIMESPEC_PRESENT" "" "functions"
++        #void conftest_jiffies_to_timespec(void){
++        #    jiffies_to_timespec();
++        #}"
++        #    compile_check_conftest "$CODE" "NV_JIFFIES_TO_TIMESPEC_PRESENT" "" "functions"
++            echo "#undef NV_JIFFIES_TO_TIMESPEC_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         drm_init_function_args)

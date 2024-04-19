@@ -1,0 +1,12 @@
+diff --git a/nvidia/nv-mmap.c b/nvidia/nv-mmap.c
+index dcb8b89..b75b7a2 100644
+--- a/nvidia/nv-mmap.c
++++ b/nvidia/nv-mmap.c
+@@ -261,6 +261,7 @@ int nv_encode_caching(
+         case NV_MEMORY_CACHED:
+             if (NV_ALLOW_CACHING(memory_type))
+                 break;
++            fallthrough;
+         default:
+             nv_printf(NV_DBG_ERRORS,
+                 "NVRM: VM: cache type %d not supported for memory type %d!\n",

@@ -1,0 +1,12 @@
+diff --git a/nvidia-uvm/uvm8_user_channel.c b/nvidia-uvm/uvm8_user_channel.c
+index e8906f9..7e2d30a 100644
+--- a/nvidia-uvm/uvm8_user_channel.c
++++ b/nvidia-uvm/uvm8_user_channel.c
+@@ -36,6 +36,7 @@
+ #include "uvm8_map_external.h"
+ #include "uvm8_init.h"
+ #include "nv_uvm_interface.h"
++#include "uvm8_test.h"
+ 
+ #include <linux/sort.h>
+ 

@@ -1,0 +1,26 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..1e13dcc 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -3458,15 +3458,16 @@ compile_test() {
+             # drm_atomic_helper_connector_dpms() was removed by:
+             #   2017-07-25 7d902c05b480cc44033dcb56e12e51b082656b42
+             #
+-            CODE="
++            #CODE="
+             #if defined(NV_DRM_DRM_ATOMIC_HELPER_H_PRESENT)
+             #include <drm/drm_atomic_helper.h>
+             #endif
+-            void conftest_drm_atomic_helper_connector_dpms(void) {
+-                drm_atomic_helper_connector_dpms();
+-            }"
++            #void conftest_drm_atomic_helper_connector_dpms(void) {
++            #    drm_atomic_helper_connector_dpms();
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESENT" "" "functions"
++            echo "#undef NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         backlight_device_register)
