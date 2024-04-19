@@ -18,7 +18,7 @@ diff --git a/kernel/conftest.sh b/kernel/conftest.sh
 index b23dbb4..42dc576 100755
 --- a/kernel/conftest.sh
 +++ b/kernel/conftest.sh
-@@ -2056,7 +2056,12 @@ compile_test() {
+@@ -2074,7 +2074,12 @@ compile_test() {
              # Determine if the phys_to_dma function is present.
              #
              CODE="

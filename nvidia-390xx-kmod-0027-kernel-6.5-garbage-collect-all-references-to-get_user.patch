@@ -129,7 +129,7 @@ diff --git a/conftest.sh b/conftest.sh
 index 24daa850..abe435ff 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -3081,136 +3081,6 @@ compile_test() {
+@@ -3086,136 +3086,6 @@ compile_test() {
              return
          ;;
  

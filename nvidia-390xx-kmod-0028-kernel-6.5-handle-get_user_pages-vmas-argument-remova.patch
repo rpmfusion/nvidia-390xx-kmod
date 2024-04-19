@@ -95,7 +95,7 @@ diff --git a/conftest.sh b/conftest.sh
 index abe435ff..0131fab5 100755
 --- a/conftest.sh
 +++ b/conftest.sh
-@@ -3051,7 +3051,6 @@ compile_test() {
+@@ -3056,7 +3056,6 @@ compile_test() {
              # write and force parameters AND that gup has task_struct and
              # mm_struct as its first arguments.
              # Return if available.
@@ -103,7 +103,7 @@ index abe435ff..0131fab5 100755
  
              echo "$CONFTEST_PREAMBLE
              #include <linux/mm.h>
-@@ -3075,6 +3074,31 @@ compile_test() {
+@@ -3080,6 +3079,31 @@ compile_test() {
                  return
              fi
  
