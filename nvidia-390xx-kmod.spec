@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       8%{?dist}
+Release:       9%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -252,6 +252,19 @@ done
 
 
 %changelog
+* Fri Apr 19 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-9
+- Try to fix errors and warnings for Fedora 40 and gcc14 - RFBZ#6905
+  Can't fix "Please avoid flushing system-wide workqueues" warning as
+  destroy_workqueue and alloc_workqueue functions are GPL only symbols
+- Fixed previous patches - Hunk offsets
+- SPEC file clean-up
+- Added CVE warning to description in SPEC file
+- Important warning: this module has reached the end of support from NVidia
+  It is therefore exposed to Common Vulnerabilities and Exposures (CVE).
+  More information on the concerned CVE could be obtained here:
+  https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=NVIDIA+390.157+linux
+  https://www.nvidia.com/en-us/security/
+
 * Sat Apr 06 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-8
 - Add patch for kernel >= 6.8
 
