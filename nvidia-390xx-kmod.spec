@@ -130,6 +130,12 @@ BuildRequires:  %{AkmodsBuildRequires}
 %description
 The nvidia 390xx %{version} display driver kernel module for kernel %{kversion}.
 
+Important warning: this module has reached the end of support from NVidia.
+It is therefore exposed to Common Vulnerabilities and Exposures (CVE).
+More information on the concerned CVE could be obtained here:
+https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=NVIDIA+390.157+linux
+https://www.nvidia.com/en-us/security/
+
 
 %prep
 # error out if there was something wrong with kmodtool
