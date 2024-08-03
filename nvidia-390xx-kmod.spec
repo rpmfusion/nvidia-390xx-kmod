@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       9%{?dist}
+Release:       10%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -252,6 +252,9 @@ done
 
 
 %changelog
+* Sat Aug 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
+
 * Fri Apr 19 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-9
 - Try to fix errors and warnings for Fedora 40 and gcc14 - RFBZ#6905
   Can't fix "Please avoid flushing system-wide workqueues" warning as
