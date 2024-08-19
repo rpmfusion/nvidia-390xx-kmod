@@ -102,6 +102,7 @@ Patch151: nvidia-390xx-kmod-0085-undef-NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT-in-c
 Patch152: nvidia-390xx-kmod-0086-undef-NV_DRM_CONNECTOR_FUNCS_HAVE_MODE_IN_NAME-in-conftest_sh.patch
 Patch153: nvidia-390xx-kmod-0087-undef-NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT-in-conftest_sh.patch
 Patch154: nvidia-390xx-kmod-0088-undef-NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESENT-in-conftest_sh.patch
+Patch155: nvidia-390xx-kmod-0089-kernel-6.10-removed-follow_pfn-function.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -218,6 +219,9 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 31 -p1 -b 31 -d kernel
 %patch -P 32 -p1 -b 32 -d kernel
 %patch -P 33 -p1 -b 33 -d kernel
+
+%patch -P 155 -p1 -b 155
+
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
 %patch -P 41 -p1 -b 41 -d kernel
