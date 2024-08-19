@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       10%{?dist}
+Release:       11%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -260,6 +260,11 @@ done
 
 
 %changelog
+* Mon Aug 19 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-11
+- Add patch for kernel >= 6.10 - RFBZ#7022
+- Fix warning: suggest braces around empty body in an ‘if’ statement
+- Fix warning: old style declaration
+
 * Sat Aug 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
 
