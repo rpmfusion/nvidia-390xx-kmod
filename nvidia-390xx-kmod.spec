@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       11%{?dist}
+Release:       12%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -105,6 +105,7 @@ Patch154: nvidia-390xx-kmod-0088-undef-NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESE
 Patch155: nvidia-390xx-kmod-0089-kernel-6.10-removed-follow_pfn-function.patch
 Patch156: nvidia-390xx-kmod-0090-fix_warning_suggested_braces_around_empty_body_in_if.patch
 Patch157: nvidia-390xx-kmod-0091-fix_warning_old_style_declaration_.patch
+Patch158: nvidia-390xx-kmod-0092-fix_index_0_is_out_of_range_kernel_6.8_traces.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -225,6 +226,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 155 -p1 -b 155
 %patch -P 156 -p1 -b 156
 %patch -P 157 -p1 -b 157
+%patch -P 158 -p1 -b 158
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
@@ -260,6 +262,11 @@ done
 
 
 %changelog
+* Sat Oct 05 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-12
+- Fix for 'index 0 is out of range for type 'uvm_gpu_chunk_t *[*]' and
+  uvm_page_directory_t *[*]' traces from kernel 6.8.x - RFBZ#7069
+  Thanks to Bruce Jerrick
+
 * Mon Aug 19 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-11
 - Add patch for kernel >= 6.10 - RFBZ#7022
 - Fix warning: suggest braces around empty body in an ‘if’ statement
