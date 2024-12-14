@@ -106,6 +106,7 @@ Patch155: nvidia-390xx-kmod-0089-kernel-6.10-removed-follow_pfn-function.patch
 Patch156: nvidia-390xx-kmod-0090-fix_warning_suggested_braces_around_empty_body_in_if.patch
 Patch157: nvidia-390xx-kmod-0091-fix_warning_old_style_declaration_.patch
 Patch158: nvidia-390xx-kmod-0092-fix_index_0_is_out_of_range_kernel_6.8_traces.patch
+Patch159: nvidia-390xx-kmod-0093-kernel-6.12-removed-output_poll_changed-function.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -227,6 +228,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 156 -p1 -b 156
 %patch -P 157 -p1 -b 157
 %patch -P 158 -p1 -b 158
+%patch -P 159 -p1 -b 159
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel

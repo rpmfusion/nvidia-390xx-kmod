@@ -1,0 +1,93 @@
+From 31ff660e7b4bed917d1f63e9e7836f4e33237652 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Nicolas=20Vi=C3=A9ville?= <nicolas.vieville@uphf.fr>
+Date: Sat, 14 Dec 2024 08:57:27 +0100
+Subject: [PATCH] Linux 6.12: drm_mode_config_funcs.output_poll_changed
+ function removed, then add compile_check_conftest case in conftest.h and
+ tests in sources
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Nicolas Viéville <nicolas.vieville@uphf.fr>
+---
+ kernel/conftest.sh                  | 23 +++++++++++++++++++++++
+ kernel/nvidia-drm/nvidia-drm-drv.c  |  4 ++++
+ kernel/nvidia-drm/nvidia-drm.Kbuild |  1 +
+ 3 files changed, 28 insertions(+)
+
+diff --git a/kernel/conftest.sh b/kernel/conftest.sh
+index 72cf3ec..b918bf6 100755
+--- a/kernel/conftest.sh
++++ b/kernel/conftest.sh
+@@ -4586,6 +4586,29 @@ compile_test() {
+ 
+             compile_check_conftest "$CODE" "NV_ACPI_VIDEO_BACKLIGHT_USE_NATIVE" "" "functions"
+         ;;
++
++        drm_output_poll_changed)
++            #
++            # Determine whether drm_mode_config_funcs.output_poll_changed
++            # callback is present
++            #
++            # Removed by commit 446d0f4849b1 ("drm: Remove struct
++            # drm_mode_config_funcs.output_poll_changed") in v6.12. Hotplug
++            # event support is handled through the fbdev emulation interface
++            # going forward.
++            #
++            CODE="
++            #if defined(NV_DRM_DRM_MODE_CONFIG_H_PRESENT)
++            #include <drm/drm_mode_config.h>
++            #else
++            #include <drm/drm_crtc.h>
++            #endif
++            int conftest_drm_output_poll_changed_available(void) {
++                return offsetof(struct drm_mode_config_funcs, output_poll_changed);
++            }"
++
++            compile_check_conftest "$CODE" "NV_DRM_OUTPUT_POLL_CHANGED_PRESENT" "" "types"
++         ;;
+     esac
+ }
+ 
+diff --git a/kernel/nvidia-drm/nvidia-drm-drv.c b/kernel/nvidia-drm/nvidia-drm-drv.c
+index f649202..93cf692 100644
+--- a/kernel/nvidia-drm/nvidia-drm-drv.c
++++ b/kernel/nvidia-drm/nvidia-drm-drv.c
+@@ -88,6 +88,7 @@ static struct nv_drm_device *dev_list = NULL;
+ 
+ #if defined(NV_DRM_ATOMIC_MODESET_AVAILABLE)
+ 
++#if defined(NV_DRM_OUTPUT_POLL_CHANGED_PRESENT)
+ static void nv_drm_output_poll_changed(struct drm_device *dev)
+ {
+     struct drm_connector *connector = NULL;
+@@ -131,6 +132,7 @@ static void nv_drm_output_poll_changed(struct drm_device *dev)
+     nv_drm_connector_list_iter_end(&conn_iter);
+ #endif
+ }
++#endif /* NV_DRM_OUTPUT_POLL_CHANGED_PRESENT */
+ 
+ static struct drm_framebuffer *nv_drm_framebuffer_create(
+     struct drm_device *dev,
+@@ -168,7 +170,9 @@ static const struct drm_mode_config_funcs nv_mode_config_funcs = {
+     .atomic_check  = nv_drm_atomic_check,
+     .atomic_commit = nv_drm_atomic_commit,
+ 
++    #if defined(NV_DRM_OUTPUT_POLL_CHANGED_PRESENT)
+     .output_poll_changed = nv_drm_output_poll_changed,
++    #endif
+ };
+ 
+ static void nv_drm_event_callback(const struct NvKmsKapiEvent *event)
+diff --git a/kernel/nvidia-drm/nvidia-drm.Kbuild b/kernel/nvidia-drm/nvidia-drm.Kbuild
+index cb49130..4dfc721 100644
+--- a/kernel/nvidia-drm/nvidia-drm.Kbuild
++++ b/kernel/nvidia-drm/nvidia-drm.Kbuild
+@@ -107,3 +107,4 @@ NV_CONFTEST_TYPE_COMPILE_TESTS += drm_device_has_pdev
+ NV_CONFTEST_TYPE_COMPILE_TESTS += dma_resv_add_fence
+ NV_CONFTEST_TYPE_COMPILE_TESTS += dma_resv_reserve_fences
+ NV_CONFTEST_TYPE_COMPILE_TESTS += reservation_object_reserve_shared_has_num_fences_arg
++NV_CONFTEST_TYPE_COMPILE_TESTS += drm_output_poll_changed
+-- 
+2.47.1
+
