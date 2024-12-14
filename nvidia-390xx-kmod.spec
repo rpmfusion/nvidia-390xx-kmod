@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       12%{?dist}
+Release:       13%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -264,6 +264,9 @@ done
 
 
 %changelog
+* Sat Dec 14 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-13
+- Add patch for kernel >= 6.12
+
 * Sat Oct 05 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-12
 - Fix for 'index 0 is out of range for type 'uvm_gpu_chunk_t *[*]' and
   uvm_page_directory_t *[*]' traces from kernel 6.8.x - RFBZ#7069
