@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       13%{?dist}
+Release:       14%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -264,6 +264,10 @@ done
 
 
 %changelog
+* Mon Dec 16 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-14
+- Fix patch for kernel >= 6.12 - needs DRM kernel mode setting enabled via
+  nvidia-drm.modeset=1
+
 * Sat Dec 14 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-13
 - Add patch for kernel >= 6.12
 
