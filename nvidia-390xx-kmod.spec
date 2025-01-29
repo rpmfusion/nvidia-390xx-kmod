@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       14%{?dist}
+Release:       15%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -264,6 +264,9 @@ done
 
 
 %changelog
+* Wed Jan 29 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-15
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
 * Mon Dec 16 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-14
 - Fix patch for kernel >= 6.12 - needs DRM kernel mode setting enabled via
   nvidia-drm.modeset=1
