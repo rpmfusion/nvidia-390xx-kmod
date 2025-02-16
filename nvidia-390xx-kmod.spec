@@ -107,6 +107,7 @@ Patch156: nvidia-390xx-kmod-0090-fix_warning_suggested_braces_around_empty_body_
 Patch157: nvidia-390xx-kmod-0091-fix_warning_old_style_declaration_.patch
 Patch158: nvidia-390xx-kmod-0092-fix_index_0_is_out_of_range_kernel_6.8_traces.patch
 Patch159: nvidia-390xx-kmod-0093-kernel-6.12-adaptation.patch
+Patch160: nvidia-390xx-kmod-0094-kernel-6.13-kbuild-external-module-source-tree-change.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -229,6 +230,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 157 -p1 -b 157
 %patch -P 158 -p1 -b 158
 %patch -P 159 -p1 -b 159
+%patch -P 160 -p1 -b 160
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
