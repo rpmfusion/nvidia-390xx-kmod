@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       16%{?dist}
+Release:       17%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -247,6 +247,7 @@ done
 
 
 %build
+export CC+=" -std=gnu17"
 for kernel_version in %{?kernel_versions}; do
   pushd _kmod_build_${kernel_version%%___*}/
     make V=1 %{?_smp_mflags} \
@@ -268,6 +269,9 @@ done
 
 
 %changelog
+* Fri Apr 11 2025 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-17
+- Force build to use std=gnu17
+
 * Sun Feb 16 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-16
 - Add patch for kernel >= 6.13
 - Add patch for kernel >= 6.14
