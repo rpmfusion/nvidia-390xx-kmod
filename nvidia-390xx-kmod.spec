@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       18%{?dist}
+Release:       19%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -280,6 +280,14 @@ done
 
 
 %changelog
+* Wed Jun 18 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-19
+- gcc-15: move force build to use std=gnu17 from SPEC file to NVidia sources
+- kernel >= 6.15: Kbuild: replace EXTRA_CFLAGS with ccflags-y
+- kernel >= 6.15: add MODULE_DESCRIPTION macro
+- kernel >= 6.15: nvidia-drm-connector.c: struct drm_display_mode to const
+- kernel >= 6.15: convert del_timer_sync to timer_delete_sync
+- kernel >= 6.15: switch vm_flags_set and vm_flags_clear to vm_flags_reset
+
 * Fri Apr 11 2025 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-18
 - Fix up last commit
 
