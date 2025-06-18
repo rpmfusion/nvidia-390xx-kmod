@@ -111,6 +111,7 @@ Patch160: nvidia-390xx-kmod-0094-kernel-6.13-kbuild-external-module-source-tree-
 Patch161: nvidia-390xx-kmod-0095-kernel-6.14-date-removed-from-struct-drm_driver.patch
 Patch162: nvidia-390xx-kmod-0096-kernel-6.15-replace_EXTRA_CFLAGS_with_ccflags-y.patch
 Patch163: nvidia-390xx-kmod-0097-kernel-6.15-add_MODULE_DESCRIPTION_macro.patch
+Patch164: nvidia-390xx-kmod-0098-kernel-6.15-fix_gcc-15_std_gnu17.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -237,6 +238,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 161 -p1 -b 161
 %patch -P 162 -p1 -b 162
 %patch -P 163 -p1 -b 163
+%patch -P 164 -p1 -b 164
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
