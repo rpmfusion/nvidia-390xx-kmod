@@ -113,6 +113,7 @@ Patch162: nvidia-390xx-kmod-0096-kernel-6.15-replace_EXTRA_CFLAGS_with_ccflags-y
 Patch163: nvidia-390xx-kmod-0097-kernel-6.15-add_MODULE_DESCRIPTION_macro.patch
 Patch164: nvidia-390xx-kmod-0098-kernel-6.15-fix_gcc-15_std_gnu17.patch
 Patch165: nvidia-390xx-kmod-0099-kernel-6.15-struct_drm_display_mode_to_const.patch
+Patch166: nvidia-390xx-kmod-0100-kernel-6.15-convert_del_timer_sync_to_timer_delete_sync.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -241,6 +242,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 163 -p1 -b 163
 %patch -P 164 -p1 -b 164
 %patch -P 165 -p1 -b 165
+%patch -P 166 -p1 -b 166
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
