@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       19%{?dist}
+Release:       20%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -280,6 +280,9 @@ done
 
 
 %changelog
+* Sun Jul 27 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-20
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
+
 * Wed Jun 18 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-19
 - gcc-15: move force build to use std=gnu17 from SPEC file to NVidia sources
 - kernel >= 6.15: Kbuild: replace EXTRA_CFLAGS with ccflags-y
