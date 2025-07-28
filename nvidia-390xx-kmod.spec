@@ -119,7 +119,7 @@ done
 
 
 %changelog
-* Mon Jul 28 2025 Nicolas Chauvet <kwizart@gmail.com>
+* Mon Jul 28 2025 Nicolas Chauvet <kwizart@gmail.com> - 3:390.154-4
 - Rebuilt
 
 * Thu Nov 03 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-3
