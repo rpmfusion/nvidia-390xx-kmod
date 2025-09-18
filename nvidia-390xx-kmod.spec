@@ -116,6 +116,7 @@ Patch165: nvidia-390xx-kmod-0099-kernel-6.15-struct_drm_display_mode_to_const.pa
 Patch166: nvidia-390xx-kmod-0100-kernel-6.15-convert_del_timer_sync_to_timer_delete_sync.patch
 Patch167: nvidia-390xx-kmod-0101-kernel-6.15-switch_vm_flags_set_and_vm_flags_clear_to_vm_flags_reset.patch
 Patch168: nvidia-390xx-kmod-0102-kernel-6.17-add_drm_format_info_struct_to_drm_framebuffer_struct.patch
+Patch169: nvidia-390xx-kmod-0103-kernel-6.17-allow_to_pass_format_info_struct_into_drm_helper_mode_fill_fb_struct.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -247,6 +248,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 166 -p1 -b 166
 %patch -P 167 -p1 -b 167
 %patch -P 168 -p1 -b 168
+%patch -P 169 -p1 -b 169
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
