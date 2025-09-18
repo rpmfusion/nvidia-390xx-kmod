@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       20%{?dist}
+Release:       21%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -284,6 +284,11 @@ done
 
 
 %changelog
+* Thu Sep 18 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-21
+- kernel >= 6.17: add drm_format_info struct to drm_framebuffer struct
+- kernel >= 6.17: allow to pass format_info struct into
+  drm_helper_mode_fill_fb_struct()
+
 * Sun Jul 27 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-20
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
 
