@@ -322,6 +322,63 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
   %endif
  %endif
 %endif
+%if 0%{?rhel} == 9
+ # Define kvl (linux) & kvr (release) for use in "patching" logical
+ %define kvl %(echo %{kernel_versions} | cut -d"-" -f1)
+ %define kvr %(echo %{kernel_versions} | cut -d"-" -f2 | cut -d"." -f1)
+
+ # Perform "patching" edits to sources files.
+ #  Note: Using this method, as opposed to making a patch, allows
+ #        the src.rpm to be compiled under various point release kernels.
+ #  Note: Use [ >][>=] where both >= & > are present
+ %if "%{kvl}" == "5.14.0"
+  %if %{kvr} == 70
+   #  Only apply to EL 9.0 point release
+   #   >  No changes currently needed for EL 9.0 point release
+  %endif
+  %if %{kvr} >= 70
+   #  Apply to EL 9.0 point release and later
+   #   >  No changes currently needed for EL 9.0 point release
+  %endif
+  %if %{kvr} >= 162
+   #  Apply to EL 9.1 point release and later
+   #   >  No changes currently needed for EL 9.1 point release
+  %endif
+  %if %{kvr} >= 284
+   #  Apply to EL 9.2 point release and later
+   #   >  No changes currently needed for EL 9.2 point release
+  %endif
+  %if %{kvr} >= 362
+   #  Apply to EL 9.3 point release and later
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+  %if %{kvr} >= 427
+   #  Apply to EL 9.4 point release and later
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 4, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+  %endif
+  %if %{kvr} >= 503
+   #  Apply to EL 9.5 point release and later
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 2, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia/nv-acpi.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia/nv-acpi.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 3, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-uvm/uvm8.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 3, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia/nv-mmap.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 8, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 12, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/common/inc/nv-mm.h
+  %endif
+  %if %{kvr} == 570
+   #  Only apply to EL 9.6 point release
+   #   >  No changes currently needed for EL 9.6 point release
+  %endif
+  %if %{kvr} > 570
+   #  Apply to post EL 9.6 point release
+   #%{__sed} -i  's/ >= KERNEL_VERSION(6, 12, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 14, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+ %endif
+%endif
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
