@@ -257,6 +257,72 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 43 -p1 -b 43 -d kernel
 %endif
 
+%if 0%{?rhel} == 8
+ # Define kvl (linux) & kvr (release) for use in "patching" logical
+ %define kvl %(echo %{kernel_versions} | cut -d"-" -f1)
+ %define kvr %(echo %{kernel_versions} | cut -d"-" -f2 | cut -d"." -f1)
+
+ # Perform "patching" edits to sources files.
+ #  Note: Using this method, as opposed to making a patch, allows
+ #        the src.rpm to be compiled under various point release kernels.
+ #  Note: Use [ >][>=] where both >= & > are present
+ %if "%{kvl}" == "4.18.0"
+  %if %{kvr} == 80
+   #  Only apply to EL 8.0 point release
+   #   >  No changes currently needed for EL 8.0 point release
+  %endif
+  %if %{kvr} >= 80
+   #  Apply to EL 8.0 point release and later
+   #   >  No changes currently needed for EL 8.0 point release
+  %endif
+  %if %{kvr} >= 147
+   #  Apply to EL 8.1 point release and later
+   #   >  No changes currently needed for EL 8.1 point release
+  %endif
+  %if %{kvr} >= 193
+   #  Apply to EL 8.2 point release and later
+   #   >  No changes currently needed for EL 8.2 point release
+  %endif
+  %if %{kvr} >= 240
+   #  Apply to EL 8.3 point release and later
+   #   >  No changes currently needed for EL 8.3 point release
+  %endif
+  %if %{kvr} >= 305
+   #  Apply to EL 8.4 point release and later
+   #   >  No changes currently needed for EL 8.4 point release
+  %endif
+  %if %{kvr} >= 348
+   #  Apply to EL 8.5 point release and later
+   #   >  No changes currently needed for EL 8.5 point release
+  %endif
+  %if %{kvr} >= 372
+   #  Apply to EL 8.6 point release and later
+   #   >  No changes currently needed for EL 8.6 point release
+  %endif
+  %if %{kvr} >= 425
+   #  Apply to EL 8.7 point release and later
+   #   >  No changes currently needed for EL 8.7 point release
+  %endif
+  %if %{kvr} >= 477
+   #  Apply to EL 8.8 point release and later
+   #   >  No changes currently needed for EL 8.8 point release
+  %endif
+  %if %{kvr} >= 513
+   #  Apply to EL 8.9 point release and later
+   %{__sed} -i 's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(4, 18, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+   %{__sed} -i 's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(4, 18, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+  %endif
+  %if %{kvr} == 553
+   #  Only apply to EL 8.10 point release
+   #   >  No changes currently needed for EL 8.10 point release
+  %endif
+  %if %{kvr} > 553
+   #  Apply to EL post 8.10 point release
+   #   >  No changes currently needed for post EL 8.10 point release
+  %endif
+ %endif
+%endif
+
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
 done
