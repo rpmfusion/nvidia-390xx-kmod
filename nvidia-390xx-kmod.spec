@@ -379,6 +379,27 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
   %endif
  %endif
 %endif
+%if 0%{?rhel} == 10
+ # Define kvl (linux) & kvr (release) for use in "patching" logical
+ %define kvl %(echo %{kernel_versions} | cut -d"-" -f1)
+ %define kvr %(echo %{kernel_versions} | cut -d"-" -f2 | cut -d"." -f1)
+
+ # Perform "patching" edits to sources files.
+ #  Note: Using this method, as opposed to making a patch, allows
+ #        the src.rpm to be compiled under various point release kernels.
+ #  Note: Use [ >][>=] where both >= & > are present
+ %if "%{kvl}" == "6.12.0"
+  %if %{kvr} == 55
+   #  Only apply to EL 10.0 point release
+   #   >  No changes currently needed for EL 10.0 point release
+  %endif
+  %if %{kvr} > 55
+   #  Apply to post EL 10.0 point release
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 14, 0)/ < KERNEL_VERSION(6, 12, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(6, 12, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+ %endif
+%endif
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
