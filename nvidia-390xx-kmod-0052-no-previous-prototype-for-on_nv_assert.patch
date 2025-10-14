@@ -1,0 +1,13 @@
+diff --git a/nvidia/nv-kthread-q-selftest.c b/nvidia/nv-kthread-q-selftest.c
+index a8db326..61f01fb 100644
+--- a/nvidia/nv-kthread-q-selftest.c
++++ b/nvidia/nv-kthread-q-selftest.c
+@@ -71,7 +71,7 @@
+ #define NUM_Q_ITEMS_IN_MULTITHREAD_TEST (NUM_TEST_Q_ITEMS * NUM_TEST_KTHREADS)
+ 
+ // This exists in order to have a function to place a breakpoint on:
+-void on_nvq_assert(void)
++static void on_nvq_assert(void)
+ {
+     (void)NULL;
+ }

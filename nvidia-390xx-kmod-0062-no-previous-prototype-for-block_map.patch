@@ -1,0 +1,13 @@
+diff --git a/nvidia-uvm/uvm8_va_block.c b/nvidia-uvm/uvm8_va_block.c
+index be6d873..6319251 100644
+--- a/nvidia-uvm/uvm8_va_block.c
++++ b/nvidia-uvm/uvm8_va_block.c
+@@ -6521,7 +6521,7 @@ static void map_get_allowed_destinations(uvm_va_block_t *block,
+     uvm_processor_mask_and(allowed_mask, allowed_mask, &va_space->can_access[id]);
+ }
+ 
+-NV_STATUS block_map(uvm_va_block_t *va_block,
++static NV_STATUS block_map(uvm_va_block_t *va_block,
+                     uvm_va_block_context_t *va_block_context,
+                     uvm_processor_id_t id,
+                     uvm_va_block_region_t region,

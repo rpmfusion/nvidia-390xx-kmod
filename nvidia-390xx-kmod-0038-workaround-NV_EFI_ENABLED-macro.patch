@@ -1,0 +1,13 @@
+diff --git a/common/inc/nv-linux.h b/common/inc/nv-linux.h
+index d35d064..16c7fbe 100644
+--- a/common/inc/nv-linux.h
++++ b/common/inc/nv-linux.h
+@@ -220,7 +220,7 @@ static inline uid_t __kuid_val(kuid_t uid)
+ #error "NV_EFI_ENABLED_ARGUMENT_COUNT value unrecognized!"
+ #endif
+ #elif (defined(NV_EFI_ENABLED_PRESENT) || defined(efi_enabled))
+-#define NV_EFI_ENABLED() efi_enabled
++#define NV_EFI_ENABLED() efi_enabled(0)
+ #else
+ #define NV_EFI_ENABLED() 0
+ #endif

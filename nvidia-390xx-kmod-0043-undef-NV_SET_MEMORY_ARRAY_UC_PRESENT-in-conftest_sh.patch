@@ -1,0 +1,29 @@
+index beaae93..9fa9c74 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -453,7 +453,7 @@ compile_test() {
+             #
+             # Determine if the set_memory_array_uc() function is present.
+             #
+-            CODE="
++            #CODE="
+             #if defined(NV_ASM_SET_MEMORY_H_PRESENT)
+             #if defined(NV_ASM_PGTABLE_TYPES_H_PRESENT)
+             #include <asm/pgtable_types.h>
+@@ -462,11 +462,12 @@ compile_test() {
+             #else
+             #include <asm/cacheflush.h>
+             #endif
+-            void conftest_set_memory_array_uc(void) {
+-                set_memory_array_uc();
+-            }"
++            #void conftest_set_memory_array_uc(void) {
++            #    set_memory_array_uc();
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_SET_MEMORY_ARRAY_UC_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_SET_MEMORY_ARRAY_UC_PRESENT" "" "functions"
++            echo "#undef NV_SET_MEMORY_ARRAY_UC_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         sysfs_slab_unlink)

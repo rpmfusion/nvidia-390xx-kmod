@@ -11,7 +11,7 @@ diff --git a/nvidia/nv-acpi.c b/nvidia/nv-acpi.c
 index 6cfd400..d311e85 100644
 --- a/nvidia/nv-acpi.c
 +++ b/nvidia/nv-acpi.c
-@@ -503,19 +503,19 @@ static int nv_acpi_match(struct acpi_device *device, struct acpi_driver *driver)
+@@ -502,19 +502,19 @@ static int nv_acpi_match(struct acpi_device *device, struct acpi_driver *driver)
  #endif
  
  /* Do the necessary allocations and install notifier "handler" on the device-node "device" */
@@ -35,7 +35,7 @@ index 6cfd400..d311e85 100644
      }
  
      rmStatus = os_alloc_mem((void **) &pNvAcpiObject, sizeof(nv_acpi_t));
-@@ -533,32 +533,25 @@ static NV_STATUS nv_install_notifier(struct acpi_handle *handle, acpi_notify_han
+@@ -532,32 +532,25 @@ static NV_STATUS nv_install_notifier(struct acpi_handle *handle, acpi_notify_han
      if (!ACPI_FAILURE(status)) 
      {
          pNvAcpiObject->notify_handler_installed = 1;
@@ -72,7 +72,7 @@ index 6cfd400..d311e85 100644
          if (ACPI_FAILURE(status))
          {
              nv_printf(NV_DBG_INFO,
-@@ -568,14 +561,12 @@ static void nv_uninstall_notifier(struct acpi_device *device, acpi_notify_handle
+@@ -567,14 +560,12 @@ static void nv_uninstall_notifier(struct acpi_device *device, acpi_notify_handle
          {
              nv_kmem_cache_free_stack(pNvAcpiObject->sp);
              os_free_mem((void *)pNvAcpiObject);
@@ -88,7 +88,7 @@ index 6cfd400..d311e85 100644
  /*
   * acpi methods init function.
   * check if the NVIF, _DSM and WMMX methods are present in the acpi namespace.
-@@ -586,7 +577,6 @@ void NV_API_CALL nv_acpi_methods_init(NvU32 *handlesPresent)
+@@ -585,7 +576,6 @@ void NV_API_CALL nv_acpi_methods_init(NvU32 *handlesPresent)
  {
  #if defined(NV_ACPI_BUS_GET_DEVICE_PRESENT)
      struct acpi_device *device = NULL;
@@ -96,7 +96,7 @@ index 6cfd400..d311e85 100644
      int retVal = -1;
  #endif
  
-@@ -619,8 +609,10 @@ void NV_API_CALL nv_acpi_methods_init(NvU32 *handlesPresent)
+@@ -618,8 +608,10 @@ void NV_API_CALL nv_acpi_methods_init(NvU32 *handlesPresent)
                             nodes' structures. So nothing more to be done */
              }
  
@@ -109,7 +109,7 @@ index 6cfd400..d311e85 100644
                  nvif_parent_gpu_handle = NULL;
  
          } while (0);
-@@ -685,9 +677,10 @@ void NV_API_CALL nv_acpi_methods_uninit(void)
+@@ -684,9 +676,10 @@ void NV_API_CALL nv_acpi_methods_uninit(void)
  #if defined(NV_ACPI_BUS_GET_DEVICE_PRESENT)
      acpi_bus_get_device(nvif_parent_gpu_handle, &device);
  

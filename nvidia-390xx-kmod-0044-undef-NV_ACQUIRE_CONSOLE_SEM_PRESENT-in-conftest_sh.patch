@@ -1,0 +1,24 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..59a3985 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -895,13 +895,14 @@ compile_test() {
+             # Determine if the acquire_console_sem() function
+             # is present.
+             #
+-            CODE="
++            #CODE="
+             #include <linux/console.h>
+-            void conftest_acquire_console_sem(void) {
+-                acquire_console_sem(NULL);
+-            }"
++            #void conftest_acquire_console_sem(void) {
++            #    acquire_console_sem(NULL);
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_ACQUIRE_CONSOLE_SEM_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_ACQUIRE_CONSOLE_SEM_PRESENT" "" "functions"
++            echo "#undef NV_ACQUIRE_CONSOLE_SEM_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         console_lock)

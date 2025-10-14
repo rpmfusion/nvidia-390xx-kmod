@@ -1,0 +1,13 @@
+diff --git a/nvidia-uvm/uvm8_va_block.c b/nvidia-uvm/uvm8_va_block.c
+index be6d873..b52eeb4 100644
+--- a/nvidia-uvm/uvm8_va_block.c
++++ b/nvidia-uvm/uvm8_va_block.c
+@@ -9389,7 +9389,7 @@ static NV_STATUS block_cpu_fault_locked(uvm_va_block_t *va_block,
+     // Check logical permissions
+     status = uvm_va_range_check_logical_permissions(va_block->va_range,
+                                                     UVM_CPU_ID,
+-                                                    fault_access_type,
++                                                    (uvm_fault_type_t)fault_access_type,
+                                                     uvm_range_group_address_migratable(va_range->va_space, fault_addr));
+     if (status != NV_OK)
+         return status;

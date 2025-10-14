@@ -1,0 +1,22 @@
+diff --git a/nvidia-uvm/uvm8_tracker_test.c b/nvidia-uvm/uvm8_tracker_test.c
+index 02ce1ce..9d3ea97 100644
+--- a/nvidia-uvm/uvm8_tracker_test.c
++++ b/nvidia-uvm/uvm8_tracker_test.c
+@@ -225,7 +225,7 @@ done:
+     return status;
+ }
+ 
+-NV_STATUS test_tracker_overwrite(uvm_va_space_t *va_space)
++static NV_STATUS test_tracker_overwrite(uvm_va_space_t *va_space)
+ {
+     uvm_gpu_t *gpu;
+     uvm_channel_t *channel;
+@@ -313,7 +313,7 @@ done:
+     return status;
+ }
+ 
+-NV_STATUS test_tracker_add_tracker(uvm_va_space_t *va_space)
++static NV_STATUS test_tracker_add_tracker(uvm_va_space_t *va_space)
+ {
+     uvm_gpu_t *gpu;
+     uvm_channel_t *channel;

@@ -16,9 +16,9 @@
 
 Name:          nvidia-390xx-kmod
 Epoch:         3
-Version:       390.154
+Version:       390.157
 # Taken over by kmodtool
-Release:       4%{?dist}
+Release:       22%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -35,11 +35,88 @@ Source11:      nvidia-390xx-kmodtool-excludekernel-filterfile
 # kernel support
 Patch12: do-div-cast.patch
 Patch13: 0018-backport-nv_install_notifier-changes-from-418.30.patch
-Patch14: 0019-backport-acpi-changes-from-430.09.patch
-Patch15: 0020-backport-acpi-changes-from-455.23.04.patch
-Patch16: 0021-backport-acpi-changes-from-510.85.02.patch
-Patch17: 0022-backport-acpi-changes-from-515.65.01.patch
-Patch18: 0023-backport-drm_frambuffer.h-changes-from-515.76.patch
+#Copied from Arch
+Patch19:  kernel-4.16+-memory-encryption.patch
+Patch20:  nvidia-390xx-kmod-0024-kernel-6.2-adaptation.patch
+Patch21:  nvidia-390xx-kmod-0025-kernel-6.3-adaptation.patch
+Patch22:  nvidia-390xx-kmod-0026-kernel-6.4-adaptation.patch
+Patch23:  nvidia-390xx-kmod-0027-kernel-6.5-garbage-collect-all-references-to-get_user.patch
+Patch24:  nvidia-390xx-kmod-0028-kernel-6.5-handle-get_user_pages-vmas-argument-remova.patch
+Patch25:  nvidia-390xx-kmod-0029-kernel-6.6-backport-drm_gem_prime_handle_to_fd-changes-from-470.patch
+Patch26:  nvidia-390xx-kmod-0030-kernel-6.6-refuse-to-load-legacy-module-if-IBT-is-enabled.patch
+Patch27:  nvidia-390xx-kmod-0031-kernel-6.8-adaptation.patch
+Patch28:  nvidia-390xx-kmod-0032-kernel-6.8-conftest_h-wait_on_bit_lock.patch
+Patch29:  nvidia-390xx-kmod-0033-kernel-5.6-ioremap_nocache_removed.patch
+Patch100: nvidia-390xx-kmod-0034-kernel-5.9-dma_is_direct-removed.patch
+Patch101: nvidia-390xx-kmod-0035-gcc14-no-previous-prototype-for-nv_load_dma_map_scatterlist.patch
+Patch102: nvidia-390xx-kmod-0036-undef-NV_ACPI_BUS_GET_DEVICE_PRESENT-in-conftest_sh.patch
+Patch103: nvidia-390xx-kmod-0037-add-RPM_CFLAGS-setup-in-conftest_sh.patch
+Patch104: nvidia-390xx-kmod-0038-workaround-NV_EFI_ENABLED-macro.patch
+Patch105: nvidia-390xx-kmod-0039-incompatible-function-type-nv_gpu_numa_c.patch
+Patch106: nvidia-390xx-kmod-0040-fix-fallthrough-warning-nv_mmap_c.patch
+Patch107: nvidia-390xx-kmod-0041-no-previous-prototype-for-exercise_error_forwarding_va.patch
+Patch108: nvidia-390xx-kmod-0042-undef-NV_DO_GETTIMEOFDAY_PRESENT-in-conftest_sh.patch
+Patch109: nvidia-390xx-kmod-0043-undef-NV_SET_MEMORY_ARRAY_UC_PRESENT-in-conftest_sh.patch
+Patch110: nvidia-390xx-kmod-0044-undef-NV_ACQUIRE_CONSOLE_SEM_PRESENT-in-conftest_sh.patch
+Patch111: nvidia-390xx-kmod-0045-undef-NV_UNSAFE_FOLLOW_PFN_PRESENT-in-conftest_sh.patch
+Patch112: nvidia-390xx-kmod-0046-undef-NV_JIFFIES_TO_TIMESPEC_PRESENT-in-conftest_sh.patch
+Patch113: nvidia-390xx-kmod-0047-undef-NV_PNV_NPU2_INIT_CONTEXT_PRESENT-in-conftest_sh.patch
+Patch114: nvidia-390xx-kmod-0048-fix-atomic64-include-in-conftest_sh.patch
+Patch115: nvidia-390xx-kmod-0049-fix-dma_buf_map-renamed-to-iosys_map.patch
+Patch116: nvidia-390xx-kmod-0050-no-previous-prototype-for-nv_pci_register_driver.patch
+Patch117: nvidia-390xx-kmod-0051-no-previous-prototype-for-nvidia_init_exit_module-in-nv_c.patch
+Patch118: nvidia-390xx-kmod-0052-no-previous-prototype-for-on_nv_assert.patch
+Patch119: nvidia-390xx-kmod-0053-no-previous-prototype-for-_raw_q_flush.patch
+Patch120: nvidia-390xx-kmod-0054-no-previous-prototype-for-nv-ibmnpu-functions.patch
+Patch121: nvidia-390xx-kmod-0055-no-previous-prototype-for-uvm_tools_init_exit.patch
+Patch122: nvidia-390xx-kmod-0056-no-previous-prototype-for-uvm8_test_set_prefetch_filtering.patch
+Patch123: nvidia-390xx-kmod-0057-no-previous-prototype-in-uvm8_va_space_c.patch
+Patch124: nvidia-390xx-kmod-0058-no-previous-prototype-for-uvm_channel_manager_print_pending_pushes.patch
+Patch125: nvidia-390xx-kmod-0059-no-previous-prototype-in-uvm8_va_range_c.patch
+Patch126: nvidia-390xx-kmod-0060-no-previous-prototype-in-uvm8_range_group_c.patch
+Patch127: nvidia-390xx-kmod-0061-no-previous-prototype-in-uvm8_gpu_replayable_faults_c.patch
+Patch128: nvidia-390xx-kmod-0062-no-previous-prototype-for-block_map.patch
+Patch129: nvidia-390xx-kmod-0063-no-previous-prototype-for-try_get_ptes.patch
+Patch130: nvidia-390xx-kmod-0064-no-previous-prototype-in-uvm8_pushbuffer_c.patch
+Patch131: nvidia-390xx-kmod-0065-no-previous-prototype-in-uvm8_kepler_mmu_c.patch
+Patch132: nvidia-390xx-kmod-0066-no-previous-prototype-in-uvm8_pascal_mmu_c.patch
+Patch133: nvidia-390xx-kmod-0067-no-previous-prototype-for-parse_fault_entry_common.patch
+Patch134: nvidia-390xx-kmod-0068-no-previous-prototype-in-uvm8_volta_access_counter_buffer_c.patch
+Patch135: nvidia-390xx-kmod-0069-no-previous-prototype-for-va_block_set_read_duplication_locked.patch
+Patch136: nvidia-390xx-kmod-0070-no-previous-prototype-for-map_rm_pt_range.patch
+Patch137: nvidia-390xx-kmod-0071-no-previous-prototype-in-uvm8_user_channel_c.patch
+Patch138: nvidia-390xx-kmod-0072-no-previous-prototype-in-uvm8_perf_thrashing_c.patch
+Patch139: nvidia-390xx-kmod-0073-no-previous-prototype-in-uvm8_perf_prefetch_c.patch
+Patch140: nvidia-390xx-kmod-0074-no-previous-prototype-for-test_tracking.patch
+Patch141: nvidia-390xx-kmod-0075-no-previous-prototype-in-uvm8_page_tree_test_c.patch
+Patch142: nvidia-390xx-kmod-0076-no-previous-prototype-in-uvm8_tracker_test_c.patch
+Patch143: nvidia-390xx-kmod-0077-no-previous-prototype-in-uvm8_push_test_c.patch
+Patch144: nvidia-390xx-kmod-0078-no-previous-prototype-in-uvm8_channel_test_c.patch
+Patch145: nvidia-390xx-kmod-0079-no-previous-prototype-in-nvidia-modeset-linux_c.patch
+Patch146: nvidia-390xx-kmod-0080-fix-enum-implicit-conversion-from-uvm_fault_type_t-to-uvm_fault_access_type_t-in-uvm8_va_range_c.patch
+Patch147: nvidia-390xx-kmod-0081-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_replayable_faults_c.patch
+Patch148: nvidia-390xx-kmod-0082-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_non_replayable_faults_c.patch
+Patch149: nvidia-390xx-kmod-0083-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_va_block_c.patch
+Patch150: nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
+Patch151: nvidia-390xx-kmod-0085-undef-NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT-in-conftest_sh.patch
+Patch152: nvidia-390xx-kmod-0086-undef-NV_DRM_CONNECTOR_FUNCS_HAVE_MODE_IN_NAME-in-conftest_sh.patch
+Patch153: nvidia-390xx-kmod-0087-undef-NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT-in-conftest_sh.patch
+Patch154: nvidia-390xx-kmod-0088-undef-NV_DRM_ATOMIC_HELPER_CONNECTOR_DPMS_PRESENT-in-conftest_sh.patch
+Patch155: nvidia-390xx-kmod-0089-kernel-6.10-removed-follow_pfn-function.patch
+Patch156: nvidia-390xx-kmod-0090-fix_warning_suggested_braces_around_empty_body_in_if.patch
+Patch157: nvidia-390xx-kmod-0091-fix_warning_old_style_declaration_.patch
+Patch158: nvidia-390xx-kmod-0092-fix_index_0_is_out_of_range_kernel_6.8_traces.patch
+Patch159: nvidia-390xx-kmod-0093-kernel-6.12-adaptation.patch
+Patch160: nvidia-390xx-kmod-0094-kernel-6.13-kbuild-external-module-source-tree-change.patch
+Patch161: nvidia-390xx-kmod-0095-kernel-6.14-date-removed-from-struct-drm_driver.patch
+Patch162: nvidia-390xx-kmod-0096-kernel-6.15-replace_EXTRA_CFLAGS_with_ccflags-y.patch
+Patch163: nvidia-390xx-kmod-0097-kernel-6.15-add_MODULE_DESCRIPTION_macro.patch
+Patch164: nvidia-390xx-kmod-0098-kernel-6.15-fix_gcc-15_std_gnu17.patch
+Patch165: nvidia-390xx-kmod-0099-kernel-6.15-struct_drm_display_mode_to_const.patch
+Patch166: nvidia-390xx-kmod-0100-kernel-6.15-convert_del_timer_sync_to_timer_delete_sync.patch
+Patch167: nvidia-390xx-kmod-0101-kernel-6.15-switch_vm_flags_set_and_vm_flags_clear_to_vm_flags_reset.patch
+Patch168: nvidia-390xx-kmod-0102-kernel-6.17-add_drm_format_info_struct_to_drm_framebuffer_struct.patch
+Patch169: nvidia-390xx-kmod-0103-kernel-6.17-allow_to_pass_format_info_struct_into_drm_helper_mode_fill_fb_struct.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -64,8 +141,16 @@ BuildRequires:  %{AkmodsBuildRequires}
 # kmodtool does its magic here
 %{expand:%(kmodtool --target %{_target_cpu} --repo rpmfusion --kmodname %{name} --filterfile %{SOURCE11} --obsolete-name nvidia --obsolete-version "%{?epoch}:%{version}" %{?buildforkernels:--%{buildforkernels}} %{?kernels:--for-kernels "%{?kernels}"} 2>/dev/null) }
 
+
 %description
 The nvidia 390xx %{version} display driver kernel module for kernel %{kversion}.
+
+Important warning: this module has reached the end of support from NVidia.
+It is therefore exposed to Common Vulnerabilities and Exposures (CVE).
+More information on the concerned CVE could be obtained here:
+https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=NVIDIA+390.157+linux
+https://www.nvidia.com/en-us/security/
+
 
 %prep
 # error out if there was something wrong with kmodtool
@@ -75,38 +160,263 @@ kmodtool  --target %{_target_cpu}  --repo rpmfusion --kmodname %{name} --filterf
 %setup -T -c
 tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{version}-%{_target_cpu}.tar.xz
 # Apply patches
-%patch12 -p1 -b 12 -d kernel
-%patch13 -p1 -b 13 -d kernel
-%patch14 -p1 -b 14 -d kernel
-%patch15 -p1 -b 15 -d kernel
-%patch16 -p1 -b 16 -d kernel
-%patch17 -p1 -b 17 -d kernel
-%patch18 -p1 -b 18 -d kernel
+%patch -P 12 -p1 -b 12 -d kernel
+%patch -P 13 -p1 -b 13 -d kernel
+%patch -P 19 -p1 -b 19
+%patch -P 20 -p1 -b 20
+%patch -P 21 -p1 -b 21
+%patch -P 22 -p1 -b 22
+%patch -P 23 -p1 -b 23 -d kernel
+%patch -P 24 -p1 -b 24 -d kernel
+%patch -P 25 -p1 -b 25 -d kernel
+%patch -P 26 -p1 -b 26 -d kernel
+%patch -P 27 -p1 -b 27 -d kernel
+%patch -P 28 -p1 -b 28 -d kernel
+%patch -P 29 -p1 -b 29 -d kernel
+%patch -P 100 -p1 -b 100 -d kernel
+%patch -P 101 -p1 -b 101 -d kernel
+%patch -P 102 -p1 -b 102 -d kernel
+%patch -P 103 -p1 -b 103 -d kernel
+%patch -P 104 -p1 -b 104 -d kernel
+%patch -P 105 -p1 -b 105 -d kernel
+%patch -P 106 -p1 -b 106 -d kernel
+%patch -P 107 -p1 -b 107 -d kernel
+%patch -P 108 -p1 -b 108 -d kernel
+%patch -P 109 -p1 -b 109 -d kernel
+%patch -P 110 -p1 -b 110 -d kernel
+%patch -P 111 -p1 -b 111 -d kernel
+%patch -P 112 -p1 -b 112 -d kernel
+%patch -P 113 -p1 -b 113 -d kernel
+%patch -P 114 -p1 -b 114 -d kernel
+%patch -P 115 -p1 -b 115 -d kernel
+%patch -P 116 -p1 -b 116 -d kernel
+%patch -P 117 -p1 -b 117 -d kernel
+%patch -P 118 -p1 -b 118 -d kernel
+%patch -P 119 -p1 -b 119 -d kernel
+%patch -P 120 -p1 -b 120 -d kernel
+%patch -P 121 -p1 -b 121 -d kernel
+%patch -P 122 -p1 -b 122 -d kernel
+%patch -P 123 -p1 -b 123 -d kernel
+%patch -P 124 -p1 -b 124 -d kernel
+%patch -P 125 -p1 -b 125 -d kernel
+%patch -P 126 -p1 -b 126 -d kernel
+%patch -P 127 -p1 -b 127 -d kernel
+%patch -P 128 -p1 -b 128 -d kernel
+%patch -P 129 -p1 -b 129 -d kernel
+%patch -P 130 -p1 -b 130 -d kernel
+%patch -P 131 -p1 -b 131 -d kernel
+%patch -P 132 -p1 -b 132 -d kernel
+%patch -P 133 -p1 -b 133 -d kernel
+%patch -P 134 -p1 -b 134 -d kernel
+%patch -P 135 -p1 -b 135 -d kernel
+%patch -P 136 -p1 -b 136 -d kernel
+%patch -P 137 -p1 -b 137 -d kernel
+%patch -P 138 -p1 -b 138 -d kernel
+%patch -P 139 -p1 -b 139 -d kernel
+%patch -P 140 -p1 -b 140 -d kernel
+%patch -P 141 -p1 -b 141 -d kernel
+%patch -P 142 -p1 -b 142 -d kernel
+%patch -P 143 -p1 -b 143 -d kernel
+%patch -P 144 -p1 -b 144 -d kernel
+%patch -P 145 -p1 -b 145 -d kernel
+%patch -P 146 -p1 -b 146 -d kernel
+%patch -P 147 -p1 -b 147 -d kernel
+%patch -P 148 -p1 -b 148 -d kernel
+%patch -P 149 -p1 -b 149 -d kernel
+%patch -P 150 -p1 -b 150 -d kernel
+%patch -P 151 -p1 -b 151 -d kernel
+%patch -P 152 -p1 -b 152 -d kernel
+%patch -P 153 -p1 -b 153 -d kernel
+%patch -P 154 -p1 -b 154 -d kernel
 
-%patch30 -p1 -b 30 -d kernel
-%patch31 -p1 -b 31 -d kernel
-%patch32 -p1 -b 32 -d kernel
-%patch33 -p1 -b 33 -d kernel
+%patch -P 30 -p1 -b 30 -d kernel
+%patch -P 31 -p1 -b 31 -d kernel
+%patch -P 32 -p1 -b 32 -d kernel
+%patch -P 33 -p1 -b 33 -d kernel
+
+%patch -P 155 -p1 -b 155
+%patch -P 156 -p1 -b 156
+%patch -P 157 -p1 -b 157
+%patch -P 158 -p1 -b 158
+%patch -P 159 -p1 -b 159
+%patch -P 160 -p1 -b 160
+%patch -P 161 -p1 -b 161
+%patch -P 162 -p1 -b 162
+%patch -P 163 -p1 -b 163
+%patch -P 164 -p1 -b 164
+%patch -P 165 -p1 -b 165
+%patch -P 166 -p1 -b 166
+%patch -P 167 -p1 -b 167
+%patch -P 168 -p1 -b 168
+%patch -P 169 -p1 -b 169
+
 %ifarch armv7hl
-%patch40 -p1 -b 40 -d kernel
-%patch41 -p1 -b 41 -d kernel
-%patch42 -p1 -b 42 -d kernel
-%patch43 -p1 -b 43 -d kernel
+%patch -P 40 -p1 -b 40 -d kernel
+%patch -P 41 -p1 -b 41 -d kernel
+%patch -P 42 -p1 -b 42 -d kernel
+%patch -P 43 -p1 -b 43 -d kernel
+%endif
+
+%if 0%{?rhel} == 8
+ # Define kvl (linux) & kvr (release) for use in "patching" logical
+ %define kvl %(echo %{kernel_versions} | cut -d"-" -f1)
+ %define kvr %(echo %{kernel_versions} | cut -d"-" -f2 | cut -d"." -f1)
+
+ # Perform "patching" edits to sources files.
+ #  Note: Using this method, as opposed to making a patch, allows
+ #        the src.rpm to be compiled under various point release kernels.
+ #  Note: Use [ >][>=] where both >= & > are present
+ %if "%{kvl}" == "4.18.0"
+  %if %{kvr} == 80
+   #  Only apply to EL 8.0 point release
+   #   >  No changes currently needed for EL 8.0 point release
+  %endif
+  %if %{kvr} >= 80
+   #  Apply to EL 8.0 point release and later
+   #   >  No changes currently needed for EL 8.0 point release
+  %endif
+  %if %{kvr} >= 147
+   #  Apply to EL 8.1 point release and later
+   #   >  No changes currently needed for EL 8.1 point release
+  %endif
+  %if %{kvr} >= 193
+   #  Apply to EL 8.2 point release and later
+   #   >  No changes currently needed for EL 8.2 point release
+  %endif
+  %if %{kvr} >= 240
+   #  Apply to EL 8.3 point release and later
+   #   >  No changes currently needed for EL 8.3 point release
+  %endif
+  %if %{kvr} >= 305
+   #  Apply to EL 8.4 point release and later
+   #   >  No changes currently needed for EL 8.4 point release
+  %endif
+  %if %{kvr} >= 348
+   #  Apply to EL 8.5 point release and later
+   #   >  No changes currently needed for EL 8.5 point release
+  %endif
+  %if %{kvr} >= 372
+   #  Apply to EL 8.6 point release and later
+   #   >  No changes currently needed for EL 8.6 point release
+  %endif
+  %if %{kvr} >= 425
+   #  Apply to EL 8.7 point release and later
+   #   >  No changes currently needed for EL 8.7 point release
+  %endif
+  %if %{kvr} >= 477
+   #  Apply to EL 8.8 point release and later
+   #   >  No changes currently needed for EL 8.8 point release
+  %endif
+  %if %{kvr} >= 513
+   #  Apply to EL 8.9 point release and later
+   %{__sed} -i 's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(4, 18, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+   %{__sed} -i 's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(4, 18, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+  %endif
+  %if %{kvr} == 553
+   #  Only apply to EL 8.10 point release
+   #   >  No changes currently needed for EL 8.10 point release
+  %endif
+  %if %{kvr} > 553
+   #  Apply to EL post 8.10 point release
+   #   >  No changes currently needed for post EL 8.10 point release
+  %endif
+ %endif
+%endif
+%if 0%{?rhel} == 9
+ # Define kvl (linux) & kvr (release) for use in "patching" logical
+ %define kvl %(echo %{kernel_versions} | cut -d"-" -f1)
+ %define kvr %(echo %{kernel_versions} | cut -d"-" -f2 | cut -d"." -f1)
+
+ # Perform "patching" edits to sources files.
+ #  Note: Using this method, as opposed to making a patch, allows
+ #        the src.rpm to be compiled under various point release kernels.
+ #  Note: Use [ >][>=] where both >= & > are present
+ %if "%{kvl}" == "5.14.0"
+  %if %{kvr} == 70
+   #  Only apply to EL 9.0 point release
+   #   >  No changes currently needed for EL 9.0 point release
+  %endif
+  %if %{kvr} >= 70
+   #  Apply to EL 9.0 point release and later
+   #   >  No changes currently needed for EL 9.0 point release
+  %endif
+  %if %{kvr} >= 162
+   #  Apply to EL 9.1 point release and later
+   #   >  No changes currently needed for EL 9.1 point release
+  %endif
+  %if %{kvr} >= 284
+   #  Apply to EL 9.2 point release and later
+   #   >  No changes currently needed for EL 9.2 point release
+  %endif
+  %if %{kvr} >= 362
+   #  Apply to EL 9.3 point release and later
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+  %if %{kvr} >= 427
+   #  Apply to EL 9.4 point release and later
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 4, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+  %endif
+  %if %{kvr} >= 503
+   #  Apply to EL 9.5 point release and later
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 2, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia/nv-acpi.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 2, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia/nv-acpi.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 3, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-uvm/uvm8.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 3, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia/nv-mmap.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 8, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 12, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/common/inc/nv-mm.h
+  %endif
+  %if %{kvr} == 570
+   #  Only apply to EL 9.6 point release
+   #   >  No changes currently needed for EL 9.6 point release
+  %endif
+  %if %{kvr} > 570
+   #  Apply to post EL 9.6 point release
+   #%{__sed} -i  's/ >= KERNEL_VERSION(6, 12, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 14, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+ %endif
+%endif
+%if 0%{?rhel} == 10
+ # Define kvl (linux) & kvr (release) for use in "patching" logical
+ %define kvl %(echo %{kernel_versions} | cut -d"-" -f1)
+ %define kvr %(echo %{kernel_versions} | cut -d"-" -f2 | cut -d"." -f1)
+
+ # Perform "patching" edits to sources files.
+ #  Note: Using this method, as opposed to making a patch, allows
+ #        the src.rpm to be compiled under various point release kernels.
+ #  Note: Use [ >][>=] where both >= & > are present
+ %if "%{kvl}" == "6.12.0"
+  %if %{kvr} == 55
+   #  Only apply to EL 10.0 point release
+   #   >  No changes currently needed for EL 10.0 point release
+  %endif
+  %if %{kvr} > 55
+   #  Apply to post EL 10.0 point release
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 14, 0)/ < KERNEL_VERSION(6, 12, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(6, 12, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+ %endif
 %endif
 
 for kernel_version  in %{?kernel_versions} ; do
     cp -a kernel _kmod_build_${kernel_version%%___*}
 done
 
+
 %build
 for kernel_version in %{?kernel_versions}; do
   pushd _kmod_build_${kernel_version%%___*}/
     make V=1 %{?_smp_mflags} \
+	    RPM_CFLAGS="%{optflags}" \
         KERNEL_UNAME="${kernel_version%%___*}" SYSSRC="${kernel_version##*___}" \
         IGNORE_CC_MISMATCH=1 IGNORE_XEN_PRESENCE=1 IGNORE_PREEMPT_RT_PRESENCE=1 \
         module
   popd
 done
+
 
 %install
 for kernel_version in %{?kernel_versions}; do
@@ -117,10 +427,103 @@ done
 %{?akmod_install}
 
 
-
 %changelog
-* Mon Jul 28 2025 Nicolas Chauvet <kwizart@gmail.com> - 3:390.154-4
-- Rebuilt
+* Tue Oct 14 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-22
+- Fix patch for kernel >= 6.15 switch vm_flags_set and vm_flags_clear to
+  vm_flags_reset
+- Add support for RHEL 8, 9 and 10 with manual patching using sed through
+  the SPEC file
+
+* Thu Sep 18 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-21
+- kernel >= 6.17: add drm_format_info struct to drm_framebuffer struct
+- kernel >= 6.17: allow to pass format_info struct into
+  drm_helper_mode_fill_fb_struct()
+
+* Sun Jul 27 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-20
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_43_Mass_Rebuild
+
+* Wed Jun 18 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-19
+- gcc-15: move force build to use std=gnu17 from SPEC file to NVidia sources
+- kernel >= 6.15: Kbuild: replace EXTRA_CFLAGS with ccflags-y
+- kernel >= 6.15: add MODULE_DESCRIPTION macro
+- kernel >= 6.15: nvidia-drm-connector.c: struct drm_display_mode to const
+- kernel >= 6.15: convert del_timer_sync to timer_delete_sync
+- kernel >= 6.15: switch vm_flags_set and vm_flags_clear to vm_flags_reset
+
+* Fri Apr 11 2025 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-18
+- Fix up last commit
+
+* Fri Apr 11 2025 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-17
+- Force build to use std=gnu17
+
+* Sun Feb 16 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-16
+- Add patch for kernel >= 6.13
+- Add patch for kernel >= 6.14
+
+* Wed Jan 29 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-15
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
+
+* Mon Dec 16 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-14
+- Fix patch for kernel >= 6.12 - needs DRM kernel mode setting enabled via
+  nvidia-drm.modeset=1
+
+* Sat Dec 14 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-13
+- Add patch for kernel >= 6.12
+
+* Sat Oct 05 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-12
+- Fix for 'index 0 is out of range for type 'uvm_gpu_chunk_t *[*]' and
+  uvm_page_directory_t *[*]' traces from kernel 6.8.x - RFBZ#7069
+  Thanks to Bruce Jerrick
+
+* Mon Aug 19 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-11
+- Add patch for kernel >= 6.10 - RFBZ#7022
+- Fix warning: suggest braces around empty body in an ‘if’ statement
+- Fix warning: old style declaration
+
+* Sat Aug 03 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_41_Mass_Rebuild
+
+* Fri Apr 19 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-9
+- Try to fix errors and warnings for Fedora 40 and gcc14 - RFBZ#6905
+  Can't fix "Please avoid flushing system-wide workqueues" warning as
+  destroy_workqueue and alloc_workqueue functions are GPL only symbols
+- Fixed previous patches - Hunk offsets
+- SPEC file clean-up
+- Added CVE warning to description in SPEC file
+- Important warning: this module has reached the end of support from NVidia
+  It is therefore exposed to Common Vulnerabilities and Exposures (CVE).
+  More information on the concerned CVE could be obtained here:
+  https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=NVIDIA+390.157+linux
+  https://www.nvidia.com/en-us/security/
+
+* Sat Apr 06 2024 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-8
+- Add patch for kernel >= 6.8
+
+* Sun Feb 04 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
+
+* Sat Dec 02 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-6
+- Renamed kernel 6.5 patches
+- Add patch for kernel >= 6.6 - RFBZ#6802
+- Add patch for disabling module loading when Indirect Branch Tracking is active
+
+* Tue Sep 12 2023 Leigh Scott <leigh123linux@gmail.com> - 3:390.157-5
+- Add patch for kernel >= 6.5
+
+* Thu Aug 03 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
+
+* Thu Jun 01 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-3
+- Fix patch for kernel >= 6.2
+- Add patch for kernel >= 6.3
+- Add patch for kernel >= 6.4
+- SPEC file - Fix patchN macro is deprecated
+
+* Wed Apr 12 2023 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-2
+- Add patch for kernel >= 6.2
+
+* Sat Jan 07 2023 Henrik Nordstrom <henrik@henriknordstrom.net> - 3:390.157-1
+- Update to 390.157
 
 * Thu Nov 03 2022 Leigh Scott <leigh123linux@gmail.com> - 3:390.154-3
 - Patch for 6.0 kernel
@@ -852,7 +1255,7 @@ done
 * Thu Jun 17 2010 Nicolas Chaubvet <kwizart@gmail.com> - 1:195.36.31-1
 - Update to 195.36.31
 - Fix acpi_walk_namespace call with kernel 2.6.33 and later.
-  http://bugs.gentoo.org/show_bug.cgi?id=301318 
+  http://bugs.gentoo.org/show_bug.cgi?id=301318
 
 * Sun Jun 13 2010 Nicolas Chauvet <kwizart@gmail.com> - 1:195.36.24-2
 - Backport IOMMU - http://www.nvnews.net/vbulletin/showthread.php?t=151791
@@ -867,7 +1270,7 @@ done
 - Bump Epoch - Fan problem in recent release
 
 * Mon Mar 08 2010 Nicolas Chauvet <kwizart@fedoraproject.org> - 1:190.53-2
-- Revert to 190.53 version 
+- Revert to 190.53 version
   http://www.nvnews.net/vbulletin/announcement.php?f=14
 
 * Sat Feb 27 2010 Nicolas Chauvet <kwizart@fedoraproject.org> - 195.36.08-1
@@ -1187,7 +1590,7 @@ done
 * Tue Oct 09 2007 Thorsten Leemhuis <fedora[AT]leemhuis[DOT]info> 100.14.19-5
 - rebuilt for latest kernels
 
-* Sun Oct 07 2007 Thorsten Leemhuis <fedora AT leemhuis DOT info> 
+* Sun Oct 07 2007 Thorsten Leemhuis <fedora AT leemhuis DOT info>
 - build for rawhide kernels as of today
 
 * Thu Oct 04 2007 Thorsten Leemhuis <fedora AT leemhuis DOT info> - 100.14.19-3
@@ -1272,7 +1675,7 @@ done
 - include xen patch (thx to Bob Richmond)
 
 * Wed Nov 01 2006 Thorsten Leemhuis <fedora AT leemhuis DOT info> - 1.0.9626-2
-- include patch from 
+- include patch from
   http://www.nvnews.net/vbulletin/showpost.php?p=996233&postcount=20
 
 * Sun Oct 22 2006 Stewart Adam <s.adam AT diffingo DOT com> - 1.0.9626-1

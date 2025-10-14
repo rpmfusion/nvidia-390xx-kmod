@@ -1,0 +1,26 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..c1ba563 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -2783,15 +2783,16 @@ compile_test() {
+             # removed by commit:
+             #   2015-07-09  3fdefa399e4644399ce3e74e65a75122d52dba6a
+             #
+-            CODE="
++            #CODE="
+             #if defined(NV_DRM_DRM_CRTC_H_PRESENT)
+             #include <drm/drm_crtc.h>
+             #endif
+-            void conftest_drm_reinit_primary_mode_group(void) {
+-                drm_reinit_primary_mode_group();
+-            }"
++            #void conftest_drm_reinit_primary_mode_group(void) {
++            #    drm_reinit_primary_mode_group();
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT" "" "functions"
++            echo "#undef NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         wait_on_bit_lock_argument_count)

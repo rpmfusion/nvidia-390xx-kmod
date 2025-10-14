@@ -1,0 +1,27 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..d4a190a 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -3717,16 +3717,17 @@ compile_test() {
+             # 97fc79f97b1111c80010d34ee66312b88f531e41 (2006-06-09) in v2.6.16,
+             # includes linux/time.h and/or linux/timekeeping.h.
+             #
+-            CODE="
++            #CODE="
+             #include <linux/time.h>
+             #if defined(NV_LINUX_KTIME_H_PRESENT)
+             #include <linux/ktime.h>
+             #endif
+-            void conftest_do_gettimeofday(void) {
+-                do_gettimeofday();
+-            }"
++            #void conftest_do_gettimeofday(void) {
++            #    do_gettimeofday();
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_DO_GETTIMEOFDAY_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_DO_GETTIMEOFDAY_PRESENT" "" "functions"
++            echo "#undef NV_DO_GETTIMEOFDAY_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         drm_framebuffer_get)

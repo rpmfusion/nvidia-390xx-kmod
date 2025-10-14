@@ -1,0 +1,107 @@
+From 05dfb0c51b0078275ff47714a9e75c38ca336ca7 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Nicolas=20Vi=C3=A9ville?= <nicolas.vieville@uphf.fr>
+Date: Mon, 19 Aug 2024 15:14:13 +0200
+Subject: [PATCH] nv-linux.h: fix warning about suggested braces around empty
+ body in if
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Nicolas Viéville <nicolas.vieville@uphf.fr>
+---
+ kernel/common/inc/nv-linux.h | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/kernel/common/inc/nv-linux.h b/kernel/common/inc/nv-linux.h
+index ddbc68b..4626976 100644
+--- a/kernel/common/inc/nv-linux.h
++++ b/kernel/common/inc/nv-linux.h
+@@ -544,7 +544,9 @@ static inline void *nv_vmalloc(unsigned long size)
+     void *ptr = __vmalloc(size, GFP_KERNEL);
+ #endif
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, size);
++    }
+     return ptr;
+ }
+ 
+@@ -558,7 +560,9 @@ static inline void *nv_ioremap(NvU64 phys, NvU64 size)
+ {
+     void *ptr = ioremap(phys, size);
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, size);
++    }
+     return ptr;
+ }
+ 
+@@ -574,7 +578,9 @@ static inline void *nv_ioremap_nocache(NvU64 phys, NvU64 size)
+     void *ptr = ioremap(phys, size);
+ #endif
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, size);
++    }
+     return ptr;
+ }
+ 
+@@ -583,7 +589,9 @@ static inline void *nv_ioremap_cache(NvU64 phys, NvU64 size)
+ #if defined(NV_IOREMAP_CACHE_PRESENT)
+     void *ptr = ioremap_cache(phys, size);
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, size);
++    }
+     return ptr;
+ #else
+     return nv_ioremap(phys, size);
+@@ -595,7 +603,9 @@ static inline void *nv_ioremap_wc(NvU64 phys, NvU64 size)
+ #if defined(NV_IOREMAP_WC_PRESENT)
+     void *ptr = ioremap_wc(phys, size);
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, size);
++    }
+     return ptr;
+ #else
+     return nv_ioremap_nocache(phys, size);
+@@ -612,14 +622,18 @@ static inline void nv_iounmap(void *ptr, NvU64 size)
+     { \
+         (ptr) = kmalloc(size, NV_GFP_KERNEL); \
+         if (ptr) \
++        { \
+             NV_MEMDBG_ADD(ptr, size); \
++        } \
+     }
+ 
+ #define NV_KMALLOC_ATOMIC(ptr, size) \
+     { \
+         (ptr) = kmalloc(size, NV_GFP_ATOMIC); \
+         if (ptr) \
++        { \
+             NV_MEMDBG_ADD(ptr, size); \
++        } \
+     }
+ 
+ 
+@@ -655,12 +669,16 @@ static inline NvUPtr nv_vmap(struct page **pages, NvU32 page_count,
+     prot = cached ? PAGE_KERNEL : PAGE_KERNEL_NOCACHE;
+ #elif defined(NVCPU_FAMILY_ARM)
+     if (!nvos_is_chipset_io_coherent())
++    {
+         prot = cached ? PAGE_KERNEL : NV_PGPROT_UNCACHED(PAGE_KERNEL);
++    }
+ #endif
+     /* All memory cached in PPC64LE; can't honor 'cached' input. */
+     ptr = vmap(pages, page_count, VM_MAP, prot);
+     if (ptr)
++    {
+         NV_MEMDBG_ADD(ptr, page_count * PAGE_SIZE);
++    }
+     return (NvUPtr)ptr;
+ }
+ 
+-- 
+2.46.0
+

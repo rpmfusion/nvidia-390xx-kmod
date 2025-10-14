@@ -1,0 +1,24 @@
+diff --git a/conftest.sh b/conftest.sh
+index beaae93..e06b27e 100755
+--- a/conftest.sh
++++ b/conftest.sh
+@@ -4380,13 +4380,14 @@ compile_test() {
+             # unsafe_follow_pfn() was added by commit 69bacee7f9ad
+             # ("mm: Add unsafe_follow_pfn") in v5.13-rc1.
+             #
+-            CODE="
++            #CODE="
+             #include <linux/mm.h>
+-            void conftest_unsafe_follow_pfn(void) {
+-                unsafe_follow_pfn();
+-            }"
++            #void conftest_unsafe_follow_pfn(void) {
++            #    unsafe_follow_pfn();
++            #}"
+ 
+-            compile_check_conftest "$CODE" "NV_UNSAFE_FOLLOW_PFN_PRESENT" "" "functions"
++            #compile_check_conftest "$CODE" "NV_UNSAFE_FOLLOW_PFN_PRESENT" "" "functions"
++            echo "#undef NV_UNSAFE_FOLLOW_PFN_PRESENT" | append_conftest "functions"
+         ;;
+ 
+         drm_plane_atomic_check_has_atomic_state_arg)
