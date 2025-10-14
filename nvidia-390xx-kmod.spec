@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       21%{?dist}
+Release:       22%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -428,6 +428,12 @@ done
 
 
 %changelog
+* Tue Oct 14 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-22
+- Fix patch for kernel >= 6.15 switch vm_flags_set and vm_flags_clear to
+  vm_flags_reset
+- Add support for RHEL 8, 9 and 10 with manual patching using sed through
+  the SPEC file
+
 * Thu Sep 18 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-21
 - kernel >= 6.17: add drm_format_info struct to drm_framebuffer struct
 - kernel >= 6.17: allow to pass format_info struct into
