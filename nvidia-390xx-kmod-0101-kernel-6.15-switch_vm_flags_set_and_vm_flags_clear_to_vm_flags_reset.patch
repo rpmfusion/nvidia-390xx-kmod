@@ -42,7 +42,7 @@ index 86bf603..267e6d8 100644
 +    // mapped and which are already locked, so we can use vm_flags_reset, which
 +    // doesn't lock the VMA, but rather just asserts it is already write-locked.
 +    vm_flags_reset(vma, vma->vm_flags | flags);
-+#else
++#elif LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
 +    vm_flags_set(vma, flags);
 +#endif
 +}
@@ -54,7 +54,7 @@ index 86bf603..267e6d8 100644
 +    // (Suren Baghdasaryan, 13 Feb 2025)
 +    // See above
 +    vm_flags_reset(vma, vma->vm_flags & ~flags);
-+#else
++#elif LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
 +    vm_flags_clear(vma, flags);
 +#endif
 +}
