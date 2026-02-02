@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       22%{?dist}
+Release:       23%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -428,6 +428,9 @@ done
 
 
 %changelog
+* Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
+
 * Tue Oct 14 2025 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-22
 - Fix patch for kernel >= 6.15 switch vm_flags_set and vm_flags_clear to
   vm_flags_reset
