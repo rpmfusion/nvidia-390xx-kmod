@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       23%{?dist}
+Release:       24%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -97,7 +97,7 @@ Patch146: nvidia-390xx-kmod-0080-fix-enum-implicit-conversion-from-uvm_fault_typ
 Patch147: nvidia-390xx-kmod-0081-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_replayable_faults_c.patch
 Patch148: nvidia-390xx-kmod-0082-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_non_replayable_faults_c.patch
 Patch149: nvidia-390xx-kmod-0083-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_va_block_c.patch
-Patch150: nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
+#Patch150: nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
 Patch151: nvidia-390xx-kmod-0085-undef-NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT-in-conftest_sh.patch
 Patch152: nvidia-390xx-kmod-0086-undef-NV_DRM_CONNECTOR_FUNCS_HAVE_MODE_IN_NAME-in-conftest_sh.patch
 Patch153: nvidia-390xx-kmod-0087-undef-NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT-in-conftest_sh.patch
@@ -117,6 +117,7 @@ Patch166: nvidia-390xx-kmod-0100-kernel-6.15-convert_del_timer_sync_to_timer_del
 Patch167: nvidia-390xx-kmod-0101-kernel-6.15-switch_vm_flags_set_and_vm_flags_clear_to_vm_flags_reset.patch
 Patch168: nvidia-390xx-kmod-0102-kernel-6.17-add_drm_format_info_struct_to_drm_framebuffer_struct.patch
 Patch169: nvidia-390xx-kmod-0103-kernel-6.17-allow_to_pass_format_info_struct_into_drm_helper_mode_fill_fb_struct.patch
+Patch170: kernel-6.19.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -223,7 +224,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 147 -p1 -b 147 -d kernel
 %patch -P 148 -p1 -b 148 -d kernel
 %patch -P 149 -p1 -b 149 -d kernel
-%patch -P 150 -p1 -b 150 -d kernel
+#patch -P 150 -p1 -b 150 -d kernel
 %patch -P 151 -p1 -b 151 -d kernel
 %patch -P 152 -p1 -b 152 -d kernel
 %patch -P 153 -p1 -b 153 -d kernel
@@ -249,6 +250,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 167 -p1 -b 167
 %patch -P 168 -p1 -b 168
 %patch -P 169 -p1 -b 169
+%patch -P 170 -p1 -b 170
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
@@ -428,6 +430,11 @@ done
 
 
 %changelog
+* Wed Mar 18 2026 Sérgio Basto <sergio@serjux.com> - 3:390.157-24
+- Add kernel-6.19.patch
+- Remove nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
+  as it conflicts with kernel-6.19.patch and appears to be unnecessary
+
 * Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 3:390.157-23
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
 
