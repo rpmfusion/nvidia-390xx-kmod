@@ -373,15 +373,23 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
    %{__sed} -i  's/ < KERNEL_VERSION(6, 12, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
    %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/common/inc/nv-mm.h
   %endif
-  %if %{kvr} == 570
-   #  Only apply to EL 9.6 point release
-   #   >  No changes currently needed for EL 9.6 point release
-  %endif
-  %if %{kvr} > 570
-   #  Apply to post EL 9.6 point release
+  %if %{kvr} >= 570
+   #  Apply to EL 9.6 point release and later
    #%{__sed} -i  's/ >= KERNEL_VERSION(6, 12, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
    %{__sed} -i  's/ < KERNEL_VERSION(6, 14, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
    %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+  %if %{kvr} == 611
+   #  Only apply to EL 9.7 point release
+   #   >  No changes currently needed for EL 9.7 point release
+  %endif
+  %if %{kvr} > 611
+   #  Apply to post EL 9.7 point release
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 17, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 17, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-fb.c
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 17, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-fb.h
+   %{__sed} -i  's/ >= KERNEL_VERSION(6, 18, 0)/ >= KERNEL_VERSION(5, 14, 0)/g' kernel/common/inc/nv-linux.h
+   %{__sed} -i  's/ < KERNEL_VERSION(6, 18, 0)/ < KERNEL_VERSION(5, 14, 0)/g' kernel/nvidia-drm/nvidia-drm-prime-fence.c
   %endif
  %endif
 %endif
@@ -403,6 +411,14 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
    #  Apply to post EL 10.0 point release
    %{__sed} -i  's/ < KERNEL_VERSION(6, 14, 0)/ < KERNEL_VERSION(6, 12, 0)/g' kernel/nvidia-drm/nvidia-drm-drv.c
    %{__sed} -i  's/ >= KERNEL_VERSION(6, 15, 0)/ >= KERNEL_VERSION(6, 12, 0)/g' kernel/nvidia-drm/nvidia-drm-connector.c
+  %endif
+  %if %{kvr} == 124
+   #  Only apply to EL 10.1 point release
+   #   >  No changes currently needed for EL 10.1 point release
+  %endif
+  %if %{kvr} > 124
+   #  Apply to post EL 10.1 point release
+   #   >  No changes currently needed for post EL 10.1 point release
   %endif
  %endif
 %endif
