@@ -97,7 +97,7 @@ Patch146: nvidia-390xx-kmod-0080-fix-enum-implicit-conversion-from-uvm_fault_typ
 Patch147: nvidia-390xx-kmod-0081-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_replayable_faults_c.patch
 Patch148: nvidia-390xx-kmod-0082-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_gpu_non_replayable_faults_c.patch
 Patch149: nvidia-390xx-kmod-0083-fix-enum-implicit-conversion-from-uvm_fault_access_type_t-to-uvm_fault_type_t-in-uvm8_va_block_c.patch
-#Patch150: nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
+Patch150: nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
 Patch151: nvidia-390xx-kmod-0085-undef-NV_DRM_GEM_OBJECT_PUT_UNLOCK_PRESENT-in-conftest_sh.patch
 Patch152: nvidia-390xx-kmod-0086-undef-NV_DRM_CONNECTOR_FUNCS_HAVE_MODE_IN_NAME-in-conftest_sh.patch
 Patch153: nvidia-390xx-kmod-0087-undef-NV_DRM_REINIT_PRIMARY_MODE_GROUP_PRESENT-in-conftest_sh.patch
@@ -224,7 +224,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 147 -p1 -b 147 -d kernel
 %patch -P 148 -p1 -b 148 -d kernel
 %patch -P 149 -p1 -b 149 -d kernel
-#patch -P 150 -p1 -b 150 -d kernel
+%patch -P 150 -p1 -b 150 -d kernel
 %patch -P 151 -p1 -b 151 -d kernel
 %patch -P 152 -p1 -b 152 -d kernel
 %patch -P 153 -p1 -b 153 -d kernel
