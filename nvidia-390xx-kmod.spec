@@ -118,6 +118,7 @@ Patch167: nvidia-390xx-kmod-0101-kernel-6.15-switch_vm_flags_set_and_vm_flags_cl
 Patch168: nvidia-390xx-kmod-0102-kernel-6.17-add_drm_format_info_struct_to_drm_framebuffer_struct.patch
 Patch169: nvidia-390xx-kmod-0103-kernel-6.17-allow_to_pass_format_info_struct_into_drm_helper_mode_fill_fb_struct.patch
 Patch170: nvidia-390xx-kmod-0104-kernel-6.19-global.patch
+Patch171: nvidia-390xx-kmod-0105-kernel-6.18-remove-flush_scheduled_work.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
@@ -251,6 +252,7 @@ tar --use-compress-program xz -xf %{_datadir}/%{name}-%{version}/%{name}-%{versi
 %patch -P 168 -p1 -b 168
 %patch -P 169 -p1 -b 169
 %patch -P 170 -p1 -b 170
+%patch -P 171 -p1 -b 171
 
 %ifarch armv7hl
 %patch -P 40 -p1 -b 40 -d kernel
