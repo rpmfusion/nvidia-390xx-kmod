@@ -117,7 +117,7 @@ Patch166: nvidia-390xx-kmod-0100-kernel-6.15-convert_del_timer_sync_to_timer_del
 Patch167: nvidia-390xx-kmod-0101-kernel-6.15-switch_vm_flags_set_and_vm_flags_clear_to_vm_flags_reset.patch
 Patch168: nvidia-390xx-kmod-0102-kernel-6.17-add_drm_format_info_struct_to_drm_framebuffer_struct.patch
 Patch169: nvidia-390xx-kmod-0103-kernel-6.17-allow_to_pass_format_info_struct_into_drm_helper_mode_fill_fb_struct.patch
-Patch170: kernel-6.19.patch
+Patch170: nvidia-390xx-kmod-0104-kernel-6.19-global.patch
 
 # build system updates
 Patch30: use-kbuild-compiler.patch
