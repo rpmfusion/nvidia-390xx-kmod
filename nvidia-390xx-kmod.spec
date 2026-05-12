@@ -419,7 +419,7 @@ for kernel_version in %{?kernel_versions}; do
 	    RPM_CFLAGS="%{optflags}" \
         KERNEL_UNAME="${kernel_version%%___*}" SYSSRC="${kernel_version##*___}" \
         IGNORE_CC_MISMATCH=1 IGNORE_XEN_PRESENCE=1 IGNORE_PREEMPT_RT_PRESENCE=1 \
-        module
+        modules
   popd
 done
 
