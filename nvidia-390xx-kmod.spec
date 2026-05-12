@@ -18,7 +18,7 @@ Name:          nvidia-390xx-kmod
 Epoch:         3
 Version:       390.157
 # Taken over by kmodtool
-Release:       24%{?dist}
+Release:       25%{?dist}
 Summary:       NVIDIA 390xx display driver kernel module
 Group:         System Environment/Kernel
 License:       Redistributable, no modification permitted
@@ -450,6 +450,14 @@ done
 
 
 %changelog
+* Sun May 10 2026 Nicolas Viéville <nicolas.vieville@uphf.fr> - 3:390.157-25
+- Rework and rename patch for kernel >= 6.19
+- Re-enable nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
+- Remove flush_scheduled_work for kernel >= 6.18
+- Add patch for kernel >= 7.0.x
+- Fix make command in build section of SPEC file
+- Add last kernel version release for RHEL 9.x and 10.x
+
 * Wed Mar 18 2026 Sérgio Basto <sergio@serjux.com> - 3:390.157-24
 - Add kernel-6.19.patch
 - Remove nvidia-390xx-kmod-0084-no-previous-prototype-in-nvlink_linux_c.patch
